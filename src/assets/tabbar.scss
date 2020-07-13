@@ -1,0 +1,35 @@
+
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+
+.tabbar_container{
+    width: 100vw;
+    height: vw(60);
+    background-color: #efefef;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    .tabbar{
+        display: -webkit-flex;
+        display: flex;
+        justify-content: space-around;
+        font-size: vw(13);
+        height: 100%;
+        .tabs{
+            display: -webkit-flex;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            color: #999;
+            .title{
+                margin-top: vw(3);
+                
+            }
+        }
+        .active{
+            color: #58bc58;
+        }
+    }
+}
+  

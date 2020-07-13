@@ -1,0 +1,87 @@
+html,
+body,
+div,
+h1,h2,h3,h4,h5,h6
+a,
+p,
+img,
+span,
+i,
+em,
+form,
+input,
+table,
+tr,td,th,
+ul,ol,li,
+dl,dt,dd,
+section,
+article,
+aside,
+header,
+footer,
+nav,
+main,
+video,
+audio,
+select,
+option,
+textarea,
+output,
+label,
+datalist,
+figure,
+figcaption,
+hgroup,
+mark,
+legend,
+fieldset,
+menu{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body{
+    height: 100%;
+}
+
+ul li,
+ol li,
+dl dt,
+dl dd,
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+
+i{
+    font-style: normal;
+}
+
+b{
+    font-weight: normal;
+}
+
+img{
+    display: block;
+    border: 0;
+}
+
+input{
+    border: 0;
+}
+
+.clearFix::after{
+    content: " ";
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+
