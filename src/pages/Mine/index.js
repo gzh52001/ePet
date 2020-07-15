@@ -1,21 +1,131 @@
 import React,{Component} from 'react';
+import { NavBar, Icon } from 'antd-mobile';
 import Tabbar from '@/components/Tabbar';
-import test from '@/api/test';
+import { SettingOutlined,MessageOutlined,CheckCircleFilled,PayCircleFilled,SketchOutlined,WalletOutlined,FileTextOutlined,WhatsAppOutlined,DribbbleOutlined,CarOutlined } from '@ant-design/icons';
+import mine from '@/api/mine';
+import './mine.scss'
 class Mine extends Component{
-    async testData(){
+    // async testData(){
+    //     try{
+    //       let p = await test.getList()
+    //       console.log(p,'111');
+    //     }catch(err){
+    //       console.log(err),'222';
+    //     }
+    // }
+    constructor(){
+        super();
+        this.state={
+            myorders:[
+                {
+                    title:'待付款',
+                    icon: <WalletOutlined style={{fontSize:22}}/>
+                },
+                {
+                    title:'待收货',
+                    icon:<CarOutlined style={{fontSize:22}}/>
+                },
+                {
+                    title:'评价有礼',
+                    icon:<FileTextOutlined style={{fontSize:22}}/>
+                },
+                {
+                    title:'客服中心',
+                    icon:<WhatsAppOutlined style={{fontSize:22}}/>
+                },
+                {
+                    title:'国际订单',
+                    icon:<DribbbleOutlined style={{fontSize:22}}/>
+                },
+            ],
+            myService:[]
+        },
+        this.getService = this.getService.bind(this)
+    }
+    
+    async getService(){
         try{
-          let p = await test.getList()
-          console.log(p,'111');
+            let p = await mine.getService();
+            console.log(p.data.list[3].data.items);
+            // this.state.myService = p.data.list[3].data.items
+            this.setState({
+                myService : p.data.list[3].data.items
+            })
         }catch(err){
-          console.log(err),'222';
+            console.log(err);
         }
     }
     componentDidMount(){
-        this.testData()
+        this.getService()
     }
     render(){
+        const {myorders,myService} = this.state
         return(
-            <div>Mine
+            <div className="mine">
+                {/* 头部 */}
+                <NavBar
+                    style={{height:50}}
+                    mode="light"
+                    icon={<Icon type="left" style={{color:'#333'}}/>}
+                    onLeftClick={() => console.log('onLeftClick')}
+                    rightContent={[
+                        <Icon key="0" type="ellipsis" style={{color:'#333'}}/>,
+                    ]}
+                    >我的e宠
+                </NavBar>
+                {/* 用户信息 */}
+                <div className="userInfo">
+                    <p className="setting">
+                        <SettingOutlined />
+                        <MessageOutlined />
+                    </p>
+                    <div className="uploadImg">
+                        <img src="https://static.epetbar.com/static_wap/appmall/avatar/dog.png" />
+                        <p className="login">
+                            <span>登录</span>
+                            <span>|</span>
+                            <span>注册</span>
+                        </p>
+                    </div>
+                    <div className="more">
+                        <span><CheckCircleFilled /><i>每日签到</i></span>
+                        <span><PayCircleFilled /><i>0元兑礼</i></span>
+                        <span><SketchOutlined /><i>俱乐部</i></span>
+                    </div>
+                </div>
+                {/* 订单 */}
+                <div className="myOrders">
+                    <h3>我的订单</h3>
+                    <ul className="orders">
+                        {
+                            myorders.map(item=>{
+                                return <li className="orderItem" key={item.title}>
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </li>
+                            })
+                        }
+                        
+                    </ul>
+                </div>
+                {/* 广告 */}
+                <div className="adv">
+                    <img src="https://img2.epetbar.com/nowater/2020-05/26/16/1b3ec88ae720478931b6808084e97055.jpg"/>
+                </div>
+                {/* 服务 */}
+                <div className="service">
+                    <h3>我的服务</h3>
+                    <ul className="serviceList">
+                        {
+                            myService.map(item=>{
+                                return (<li className="serviceItem" key={item.id}>
+                                    <img src={item.above_image.img_url}/>
+                                    <span>{item.below_text}</span>
+                                </li>)
+                            })
+                        }
+                    </ul>
+                </div>
                 <Tabbar/>
             </div>
             

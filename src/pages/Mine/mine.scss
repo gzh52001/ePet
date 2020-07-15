@@ -1,0 +1,116 @@
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+
+.mine{
+    width: 100%;
+    .userInfo{
+        width: 100%;
+        height: vw(200);
+        background-color: #58bc58;
+        padding-top: vw(20);
+        .setting{
+            padding: 0 vw(20);
+            display: flex;
+            justify-content: space-between;
+            font-size: 22px;
+            color: #fff;
+        }
+        .uploadImg{
+            margin: vw(30) vw(12) 0 vw(12);
+            height: vw(70);
+            img{
+                width: vw(70);
+                height: vw(70);
+                float: left;
+            }
+            .login{
+                // clear: both;
+                float: left;
+                line-height: vw(70);
+                font-size: 16px;
+                color: #fff;
+                span{
+                    margin:0 vw(8);
+                }
+            }
+        }
+        .more{
+            height: vw(36);
+            margin: vw(22) vw(6) 0 vw(6);
+            background-color: #252525;
+            border-radius: vw(14) vw(14) 0 0;
+            color: rgb(218, 184, 100);
+            line-height: vw(36);
+            span{
+                margin-left: vw(10);
+                i{
+                    margin-left: vw(2);
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    .myOrders{
+        margin: vw(30) vw(16);
+        background-color: #fff;
+        height: vw(116);
+        border-radius: vw(10);
+        padding: 0 vw(8);
+        box-shadow: 1px 1px #eee;
+        h3{
+            padding: vw(8);
+        }
+        .orders{
+            display: flex;
+            justify-content: space-around;
+            // align-items: center;
+            margin-top: vw(20);
+            .orderItem{
+                font-size: 13px;
+                span{
+                    display: block;
+                }
+                &:last-child{
+                    padding-left: vw(10);
+                    border-left: 1px solid #eee;
+                }
+            }
+            
+        }
+    }
+    .adv{
+        height: vw(68);
+        background-color: #eee;
+        img{
+            height: 100%;
+        }
+    }
+    .service{
+        height: vw(410);
+        margin: vw(30) vw(16);
+        background-color: #fff;
+        margin-bottom: vw(90);
+        border-radius: vw(10);
+        h3{
+            padding: vw(8) vw(12);
+        }
+        .serviceList{
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: vw(10);
+            .serviceItem{
+                width: 25%;
+                text-align: center;
+                font-size: 12px;
+                color: #666;
+                margin-bottom: vw(10);
+                img{
+                    width: vw(28);
+                    height: vw(28);
+                    margin: vw(6) auto;
+                }
+            }
+        }
+    }
+}
