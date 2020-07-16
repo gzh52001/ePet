@@ -1,0 +1,63 @@
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+* {
+    touch-action: pan-y;
+}
+.fater{
+    position: relative;
+    .first{
+        height: vw(42);
+        background: #fff;
+        border: none;
+        color:black;
+        border-bottom: vw(2) solid red;
+        font-size: vw(14);
+        margin-right: vw(10);
+    }
+    .second{
+        height: vw(42);
+        background:#fff;
+        font-size: vw(14);
+        color: #333;
+        margin-right: vw(10);
+        border: none;
+    }
+    .Tab{
+        width: 100%;
+        height: vw(70);
+        margin-top: vw(1);
+        margin-bottom: vw(1);
+        padding-top: vw(10);
+        background: #fff;
+        .tabbar{
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            height: vw(50);
+            .tabs{
+                display: -webkit-flex;
+                display: flex;
+                flex-direction:column;
+                justify-content: center;
+                color: #999;
+                .title{
+                    margin-top: vw(3);
+                    
+                }
+            }
+        }
+    }
+    .box{
+        width: vw(30);
+        height: vw(30);
+        background: rgba(0,0,0,0.2);
+        padding: vw(5);
+        position:absolute;
+        color: #fff;
+        border-radius: 100%;
+        right: vw(20);
+        top: vw(350);
+        z-index: 3;
+    }
+}

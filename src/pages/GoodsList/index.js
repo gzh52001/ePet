@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Input, BackTop } from 'antd';
-import { NavBar, Icon,Toast } from 'antd-mobile'
+import { NavBar, Icon, Toast } from 'antd-mobile'
 import { RedditOutlined, UserOutlined, ShoppingCartOutlined, AppstoreOutlined, SearchOutlined, ArrowUpOutlined } from '@ant-design/icons'
 import "./index.scss"
 import one from '@/api/getsort'
@@ -36,7 +36,6 @@ class GoodsList extends Component {
                     path: '/mine',
                     icon: <UserOutlined style={{ fontSize: 22 }} />,
                 },
-
             ],
             pet: 'dog',//什么宠物
             tabNum: 0,//控制Tab的开关
@@ -45,7 +44,7 @@ class GoodsList extends Component {
             page: 1,//页码
             orderNum: 0,//升序降序控制码
             isBottom: false,//是否到底
-            check:true//防止懒加载短时间多次触发
+            check: true//防止懒加载短时间多次触发
 
         }
     }
@@ -54,28 +53,35 @@ class GoodsList extends Component {
         this.setState({
             shopid: match.params.id
         })
-        this.getShopList()//获取商品
+        this.getShopList(match.params.id,"def_desc",1)//获取商品
         this.checkScroll()//懒加载
     }
-    getShopList = async () => {//获取列表
-        let { type, shopid, pet, page ,check} = this.state
-        if(check){
+    getShopList = async (id,type,Num) => {//获取列表
+        document.body.scrollTop = document.documentElement.scrollTop = 0
+        let { pet, page, check } = this.state
+        if (check) {
             try {
-                let p = await one.getShopList(pet, type, page, shopid)
-                if(p.data.list){
-                   p.data.list.map((item)=>{
-                    let {shopList:list}=this.state
-                   list.push(item)
-                    this.setState({
-                        shopList:list,
-                        isBottom:false
-                    })
-                   })
-                   
-                }else{
+                let p = await one.getShopList(pet, type, page, id)
+                if (p.data.list.length) {
+                    if (Num == 1) {
+                        this.setState({
+                            shopList:p.data.list,
+                            isBottom: false
+                        })
+                    } else { 
+                        p.data.list.map((item) => {
+                            let { shopList: list } = this.state
+                            list.push(item)
+                            this.setState({
+                                shopList: list,
+                                isBottom: false
+                            })
+                        })
+                    }
+                } else {
                     Toast.fail('到底了', 1)
                     this.setState({
-                        isBottom:true
+                        isBottom: true
                     })
                 }
             } catch (error) {
@@ -92,51 +98,56 @@ class GoodsList extends Component {
             tabNum: Num + 1
         })
     }
-    routerBack = () => {
+    routerBack = () => {//返回一格
         this.props.history.go(-1)
     }
     changeRoute = (num) => {//排序
-        let { orderNum: changeNum } = this.state
+        let { orderNum: changeNum,shopid } = this.state
         this.setState({
             styleNum: num,
         })
         if (num == 0) {//默认
             this.setState({
-                type: "def_desc"
+                type: 'def_desc',
+                page: 1
             })
-            this.getShopList()
+            this.getShopList(shopid,"def_desc",1)
         } else if (num == 1) {//销量
             this.setState({
-                type: "sold_desc"
+                type: 'sold_desc',
+                page: 1
             })
-            this.getShopList()
+            this.getShopList(shopid,"sold_desc",1)
         } else if (num == 2) {//升序降序
             this.setState({
                 orderNum: changeNum + 1
             })
             if (changeNum == 0) {
                 this.setState({
-                    type: "price_asc"
+                    type: 'price_asc',
+                    page: 1
                 })
-                this.getShopList()
+                this.getShopList(shopid,"price_asc",1)
             } else if (changeNum % 2 == 1) {
                 this.setState({
                     type: 'price_desc',
-                    typeval: '降序'
+                    typeval: '降序',
+                    page: 1
                 })
-                this.getShopList()
+                this.getShopList(shopid,'price_desc',1)
             } else if (changeNum % 2 == 0) {
                 this.setState({
                     type: 'price_asc',
-                    typeval: '升序'
+                    typeval: '升序',
+                    page: 1
                 })
-                this.getShopList()
+                this.getShopList(shopid,"price_asc",1)
             }
         }
     }
     // 监听滚动条
     checkScroll = () => {
-        let { page:yema, isBottom} = this.state
+        let { page: yema, isBottom ,shopid,type} = this.state
         window.onscroll = () => {
             // 变量 scrollTop 是滚动条滚动时, 距离顶部的距离
             var scrollTop =
@@ -150,25 +161,25 @@ class GoodsList extends Component {
             // 滚动条到底部的条件 (距底部 30px 时触发加载)
 
             if (scrollTop + windowHeight >= scrollHeight - 30 && !isBottom) {
-                this.getShopList()
+                this.getShopList(shopid,type,0)
                 this.setState({
-                    page:yema+1,
-                    isBottom:true,
-                    check:false
+                    page: yema + 1,
+                    isBottom: true,
+                    check: false
                 })
-                setTimeout( ()=> {     
-                    this.setState({ check: true })   
-                    }, 1000)
+                setTimeout(() => {
+                    this.setState({ check: true })
+                }, 1000)
             }
         };
     }
     //添加商品
-    addGoods=(item,e)=>{
+    addGoods = (item, e) => {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation()
     }
-    goGoods=()=>{
-        console.log(1);
+    goGoods = (id) => {//去详情页
+        this.props.history.push({ pathname:'/detail/'+id})
     }
     render() {
         const { tablist, tabNum, typeval, shopList } = this.state
@@ -211,7 +222,7 @@ class GoodsList extends Component {
                         {
                             shopList.map((item,index) => {
                                 return (
-                                    <li key={item.gid+index} onClick={this.goGoods.bind(this,item)}>
+                                    <li key={item.photo+index} onClick={this.goGoods.bind(this, item.gid)}>
                                         {
                                             item.country_photo ? <img src={item.country_photo} className='country_photo'></img> : ''
                                         }
@@ -219,7 +230,7 @@ class GoodsList extends Component {
                                         <p>{item.subject}</p>
                                         <span className='price'>价格:￥{item.sale_price}&nbsp;&nbsp;<del>{item.sale_price}</del></span>
                                         <i>{item.comments}&nbsp;&nbsp;{item.sold}</i>
-                                        <b onClick={this.addGoods.bind(this,item)}><ShoppingCartOutlined style={{ fontSize: 22 }} /></b>
+                                        <b onClick={this.addGoods.bind(this, item)}><ShoppingCartOutlined style={{ fontSize: 22 }} /></b>
                                     </li>
                                 )
                             })

@@ -29,7 +29,6 @@ class Sort extends Component {
                 {/* 表头 */}
                 <NavBar
                     mode="light"
-                   /*  onLeftClick={() => console.log('onLeftClick')} */
                     rightContent={[
                         <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
                     ]}
