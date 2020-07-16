@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { Tabs } from 'antd-mobile';
-import bookApi from '@/api/book'
+import bookApi from '@/api/book';
+import {EyeOutlined,StarOutlined} from '@ant-design/icons'
 
 class Articals extends Component{
     constructor(){
@@ -13,13 +14,13 @@ class Articals extends Component{
     }
 
     async getList(id){
+        
         try{
             let p = await bookApi.getData(id)
             console.log("getlist",p.data.data.list);
             this.setState({
-                articalList : p.data.data.list
+                articalList : p.data.data.list.filter(item=>item.type!=3)
             })
-            
         }catch(err){
             console.log(err);
         }
@@ -35,7 +36,7 @@ class Articals extends Component{
     }
     render(){
         // console.log('props',this.props);
-        const {articalList} = this.state
+        const {articalList,flag} = this.state
         const {column} = this.props;
         const name = column.map(item=>{
             return {title : item.name,id:item.param}
@@ -55,25 +56,48 @@ class Articals extends Component{
                         marginLeft:26
                     }} 
                     onChange={this.change} 
-                    renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}>
+                    // renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}
+                    >
                     {/* {this.renderContent} */}
-                    <div>
+                    
+                </Tabs>
+                <div className="content">
                     {
-                        // renderContent = tab =>
-                        // (<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-                        // <p>Content of {tab.title}</p>
-                        // </div>)
-                        articalList.map((item,idx)=>{
+                        articalList.length ?
+                        articalList.map((it,idx)=>{
                             return (
-                                <div key={item.data.id +''+ idx}>
-                                    {item.data.title}
+                                <div className="artical" key={it.data.id +''+ idx}>
+                                    <div>
+                                        <img src={it.data.cover.img_url}/>
+                                        <div className="title">
+                                            <h3>{it.data.title}</h3>
+                                            <p>{it.data.describe}</p>
+                                        </div>
+                                    </div>
+                                    <footer>
+                                        <div className="user">
+                                            <img src={it.data.user.avatar.img_url}/>
+                                            <span>{it.data.user.username}</span>
+                                        </div>
+                                        <div className="favour">
+                                            <span>
+                                                <StarOutlined /> 
+                                                <i>{it.data.favnums}</i>
+                                            </span>
+                                            <span>
+                                                <EyeOutlined />
+                                                <i>{it.data.viewnums}</i>
+                                            </span>
+                                        </div>
+                                    </footer>
                                 </div>
                             )
                         })
+                        : <div></div>
+
                     }
                     </div>
                     
-                </Tabs>
             </div>
        )
     }

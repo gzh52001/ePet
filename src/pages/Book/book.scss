@@ -3,8 +3,7 @@
 }
 
 .book{
-    display: flex;
-    flex-direction: column;
+    
     // 头部
     .head{
         height: vw(160);
@@ -94,6 +93,68 @@
     }
     // 
     .acticals_container{
-        flex: 1;
+        .content{
+            
+            .artical{
+                height: vw(128);
+                padding: vw(15);
+                margin: vw(20);
+                background-color: #fff;
+                border-radius: vw(8);
+                img{
+                    height: vw(62);
+                    width:vw(126);
+                    border-radius: vw(6);
+                    float: left;
+                }
+                .title{
+                    width: vw(170);
+                    float: left;
+                    margin-left:vw(6);
+                    h3{
+                        font-size: vw(14);
+                        margin: 0;
+                    }
+                    p{
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow:ellipsis;
+                        white-space: nowrap;
+                        color: #999;
+                        font-size: vw(12);
+                        margin: vw(4) 0 0 0;
+                    }
+                }
+                footer{
+                    float: left;
+                    width: 100%;
+                    height: vw(26);
+                    display: flex;
+                    justify-content: space-between;
+                    line-height: vw(26);
+                    
+                    margin-top: vw(12);
+                    .user{
+                        font-size: vw(12);
+                        img{
+                            width: vw(23);
+                            height: vw(23);
+                            border-radius: 50%;
+                            margin-right: vw(8);
+                        }
+                    }
+                    .favour{
+                        color: #999;
+                        span{
+                            margin-left: vw(6);
+                            i{
+                                font-size: vw(12);
+                                margin-left: vw(4);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
