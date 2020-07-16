@@ -7,36 +7,106 @@ class Articals extends Component{
     constructor(){
         super();
         this.state={
-            articalList:[]
+            articalList:[],
+            isBottom:false,
+            page:1,
+            id:0,
         }
         this.getList = this.getList.bind(this)
         this.change = this.change.bind(this)
+        this.checkScroll = this.checkScroll.bind(this)
     }
 
-    async getList(id){
-        
+    async getList(id,page){
         try{
-            let p = await bookApi.getData(id)
+            let p = await bookApi.getData(id,page)
             console.log("getlist",p.data.data.list);
             this.setState({
                 articalList : p.data.data.list.filter(item=>item.type!=3)
             })
+            // if(articalList.length){
+            //     this.setState({
+            //         articalList : articalList.push(p.data.data.list.filter(item=>item.type!=3))
+            //     })
+            // }else{
+            //     this.setState({
+            //         articalList : p.data.data.list.filter(item=>item.type!=3)
+            //     })
+            // }
+            
         }catch(err){
             console.log(err);
         }
     }
 
+    // 监听滚动条
+    checkScroll() {
+        let {id,page} = this.state
+        window.onscroll = () => {
+          // 变量 scrollTop 是滚动条滚动时, 距离顶部的距离
+          var scrollTop =
+            document.documentElement.scrollTop || document.body.scrollTop;
+          // 变量 windowHeight 是可视区的高度
+          var windowHeight =
+            document.documentElement.clientHeight || document.body.clientHeight;
+          // 变量 scrollHeight 是滚动条的总高度
+          var scrollHeight =
+            document.documentElement.scrollHeight || document.body.scrollHeight;
+          // 滚动条到底部的条件 (距底部 30px 时触发加载)
+  
+          if (
+            scrollTop + windowHeight >= scrollHeight - 30 &&
+            !this.state.isBottom 
+          ) {
+                this.setState({
+                    isBottom:true,
+                    page: page+1
+                })
+
+                bookApi.getData(id,page).then(res=>{
+                    // console.log('res',res);
+                    if(res.data.data.list.length){
+                        let arr = res.data.data.list.filter(item=>item.type!=3)
+                        // console.log('arr',arr);
+                        let list =[]
+                        arr.forEach(item=>{
+                            list.push(item)
+                        })
+                        this.setState({
+                            articalList : [...this.state.articalList,...list],
+                            isBottom:false
+                        })
+                    }else{
+                        console.log('没数据了');
+                    }
+                    
+                
+                })
+                // this.setState({
+                //     isBottom:false,
+                // })
+
+            //   console.log('到底');
+          }
+        }
+    }
+
     componentDidMount(){
-        this.getList('0')
+        this.getList(0,1)
+        this.checkScroll()
     }
 
     change(tab){
         console.log('a',tab);
-        this.getList(tab.id)
+        this.setState({
+            id:tab.id
+        })
+        this.getList(tab.id,1);
+        document.body.scrollTop = document.documentElement.scrollTop = 440
     }
     render(){
         // console.log('props',this.props);
-        const {articalList,flag} = this.state
+        const {articalList} = this.state
         const {column} = this.props;
         const name = column.map(item=>{
             return {title : item.name,id:item.param}
@@ -63,7 +133,7 @@ class Articals extends Component{
                 </Tabs>
                 <div className="content">
                     {
-                        articalList.length ?
+                        
                         articalList.map((it,idx)=>{
                             return (
                                 <div className="artical" key={it.data.id +''+ idx}>
@@ -93,7 +163,7 @@ class Articals extends Component{
                                 </div>
                             )
                         })
-                        : <div></div>
+                        
 
                     }
                     </div>

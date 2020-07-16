@@ -93,6 +93,11 @@
     }
     // 
     .acticals_container{
+        .am-tabs{
+            position: sticky;
+            top: 0;
+            left: 0;
+        }
         .content{
             
             .artical{
@@ -114,6 +119,12 @@
                     h3{
                         font-size: vw(14);
                         margin: 0;
+                        width: 100%;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden;
+                        text-overflow:ellipsis;
                     }
                     p{
                         width: 100%;

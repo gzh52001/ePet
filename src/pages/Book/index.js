@@ -44,7 +44,7 @@ class Book extends Component{
     }
     async getData(){
         try{
-            let p = await bookApi.getData()
+            let p = await bookApi.getData(0,1)
             console.log(p.data);
             this.setState({
                 banner:p.data.data.advs,
