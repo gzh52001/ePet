@@ -8,6 +8,8 @@ import Sort from '@/pages/Sort';
 import Cart from '@/pages/Cart';
 import Login from '@/pages/Login';
 import Reg from '@/pages/Reg';
+import GoodsList from '@/pages/GoodsList';
+import Detail from '@/pages/detail';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path='/cart' component={Cart}></Route>
         <Route path='/login' component={Login}></Route>
         <Route path='/reg' component={Reg}></Route>
+        <Route path='/detail/:id' component={Detail}></Route>
+        <Route path='/GoodsList/:id' component={GoodsList}></Route>
         <Redirect from='/' to='/home' exact></Redirect>
       </Switch>
     </div>
