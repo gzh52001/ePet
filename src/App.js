@@ -8,7 +8,7 @@ import Sort from '@/pages/Sort';
 import Cart from '@/pages/Cart';
 import Login from '@/pages/Login';
 import Reg from '@/pages/Reg';
-
+import "./assets/flexible"
 function App() {
   return (
     <div className="App">
