@@ -1,9 +1,9 @@
 import React from 'react';
-function detailTwo (props){
+function Brand (props){
     return(
         <div>
             你好
         </div>
     )
 }
-export default detailTwo
+export default Brand

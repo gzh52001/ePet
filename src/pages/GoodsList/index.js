@@ -57,7 +57,6 @@ class GoodsList extends Component {
         this.checkScroll()//懒加载
     }
     getShopList = async (id,type,Num) => {//获取列表
-        document.body.scrollTop = document.documentElement.scrollTop = 0
         let { pet, page, check } = this.state
         if (check) {
             try {
@@ -106,6 +105,7 @@ class GoodsList extends Component {
         this.setState({
             styleNum: num,
         })
+        document.body.scrollTop = document.documentElement.scrollTop = 0
         if (num == 0) {//默认
             this.setState({
                 type: 'def_desc',
@@ -178,8 +178,11 @@ class GoodsList extends Component {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation()
     }
-    goGoods = (id) => {//去详情页
-        this.props.history.push({ pathname:'/detail/'+id})
+    goGoods = (id,price) => {//去详情页
+        this.props.history.push({ 
+            pathname:'/detail/'+id,
+            search:'?'+price,
+    })
     }
     render() {
         const { tablist, tabNum, typeval, shopList } = this.state
@@ -222,7 +225,7 @@ class GoodsList extends Component {
                         {
                             shopList.map((item,index) => {
                                 return (
-                                    <li key={item.photo+index} onClick={this.goGoods.bind(this, item.gid)}>
+                                    <li key={item.photo+index} onClick={this.goGoods.bind(this, item.gid,item.sale_price)}>
                                         {
                                             item.country_photo ? <img src={item.country_photo} className='country_photo'></img> : ''
                                         }

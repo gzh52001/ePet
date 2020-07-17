@@ -6,6 +6,7 @@
 }
 .fater{
     position: relative;
+    background-color: #f3f4f5;
     .first{
         height: vw(42);
         background: #fff;
@@ -58,6 +59,229 @@
         border-radius: 100%;
         right: vw(20);
         top: vw(350);
-        z-index: 3;
+        z-index:3;
+    }
+    .detail{
+        width: 100%;
+        min-height: vw(50);
+        .price{
+            width: 100%;
+            height: vw(66);
+            position: relative;
+            background-image: url(https://static.epetbar.com/static_web/wap/src/images/activity/brand-daybg1.png);
+            h2{
+                position: absolute;
+                line-height: vw(12);
+                top: vw(10);
+                left: vw(5);
+                font-size: vw(12);
+                color: #fff;
+                span{
+                    font-size: vw(20);
+                    color: #e6b6b6;
+                }
+            }
+            p{
+                position: absolute;
+                left: vw(5);
+                bottom: vw(7);
+                color: #fff;
+                font-size: vw(14);
+            }
+            .zcx{
+                position: absolute;
+                padding-left: vw(5);
+                background-image: url(https://static.epetbar.com/static_web/wap/src/images/activity/brand-daybg2.png);
+                right: 0;
+                height: vw(66);
+                width: vw(132);
+                .ant-statistic-content{
+                    font-size: vw(16);
+                }
+            }
+        }
+        .name{
+            width: 100%;
+            height: vw(50);
+            padding-bottom:vw(10) ;
+            background-color: #fff;
+            padding-left: vw(5);
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            margin-bottom: vw(10);
+            h2{
+                font-size: vw(14);
+                color: #333;
+            }
+            p{
+                font-size: vw(12);
+                line-height: vw(12);
+                color: #e75656;
+            }
+        }
+        .format{
+            width: 100%;
+            background-color: #fff;
+            margin-bottom: vw(10);
+            min-height: vw(50);
+            p{  
+                display: block;
+                width: 100%;
+                height: vw(42);
+                font-size: vw(14);
+                line-height: vw(14);
+                margin-bottom:0 ;
+                color: #666;
+                padding: vw(10) 0 vw(10) vw(10);
+                span{
+                    font-size: vw(14);
+                    line-height: vw(14);
+                    color: #ea5858;
+                }
+            }
+            .choice{
+                border-top: vw(1) solid #e7e7e7;
+                width: 100%;
+                min-height: vw(50);
+                padding: vw(10);
+                span{
+                    width: vw(54);
+                    display: block;
+                    font-size: vw(12);
+                    line-height: vw(12);
+                    color: #999;
+                    float: left;
+                }
+                div{
+                    width: vw(300);
+                    display: inline-block;
+                   /*  min-height: vw(30); */
+                    button{
+                        min-width: vw(90);
+                        height: vw(25);
+                        font-size: vw(12);
+                        margin: 0 vw(5) vw(5) 0;
+                        padding: vw(5) vw(20);
+                        background-color: #fff;
+                        border: vw(1) solid #e7e7e7;
+                        border-radius:vw(5);
+                        color: #333;
+                    }
+                    .select{
+                        background-color: #f03e3e;
+                        border: none;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .count{
+            width: 100%;
+            height: vw(52);
+            padding: vw(10);
+            background-color: #fff;
+            margin-bottom: vw(10);
+            b{
+                font-size: vw(14);
+                float:left;
+                line-height: vw(14);
+            }
+            .am-stepper{
+                display:block;
+                float:left;
+                margin-left: vw(15);
+                width: vw(108);
+                height: vw(32);
+            }
+        }
+    }
+    .ensure{
+        width: 100%;
+        height: vw(41);
+        background-color: #fff;
+        span{
+            width: calc(100% / 3);
+            display: inline-block;
+            text-align: center;
+            height: vw(41);
+            padding: vw(10) 0;
+            img{
+                display: inline-block;
+                width: vw(20);
+                height: vw(20);
+            }
+        }
+    }
+    .window{
+        position: fixed;
+        background: rgba(0,0,0,.6);
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: vw(667);
+        z-index: 999;
+        .contx{
+            position: absolute;
+            bottom: 0;
+            h2{
+                width: 100%;
+                height: vw(40);
+                background-color: #fff;
+                text-align: center;
+                font-size: vw(16);
+                color: #000;
+                margin-bottom:0;
+                line-height: vw(40);
+            }
+            div{
+                width: 100%;
+                min-height:vw(53);
+                background-color: #fff;
+                padding: vw(10);
+                border-top: vw(1) solid #e7e7e7;
+                p{
+                    width: 100%;
+                    min-height: vw(20);
+                    margin-bottom: vw(3);
+                    font-size: vw(12);
+                    img{
+                        width: vw(20);
+                        height: vw(20);
+                        display: inline-block;
+                    }
+                }
+            }
+            button{
+                width: 100%;
+                height: vw(50);
+                text-align: center;
+                background: #f03e3e;
+                color: #fff;
+                border: none;
+            }
+        }
+    }
+    footer{
+        width: 100%;
+        height: vw(50);
+        position: fixed;
+        bottom: 0;
+        background-color: #fff;
+        div{
+            float: left;
+            height: 100%;
+            width: 50%;
+            font-size: vw(14);
+            text-align: center;
+        }
+        button{
+            width: 50%;
+            height: 100%;
+            float: left;
+            background: #e75656;
+            color: #fff;
+            border: none;
+        }
     }
 }
