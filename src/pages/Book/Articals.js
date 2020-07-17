@@ -23,23 +23,13 @@ class Articals extends Component{
             console.log("getlist",p.data.data.list);
             this.setState({
                 articalList : p.data.data.list.filter(item=>item.type!=3)
-            })
-            // if(articalList.length){
-            //     this.setState({
-            //         articalList : articalList.push(p.data.data.list.filter(item=>item.type!=3))
-            //     })
-            // }else{
-            //     this.setState({
-            //         articalList : p.data.data.list.filter(item=>item.type!=3)
-            //     })
-            // }
-            
+            }) 
         }catch(err){
             console.log(err);
         }
     }
 
-    // 监听滚动条
+    // 懒加载：监听滚动条
     checkScroll() {
         let {id,page} = this.state
         window.onscroll = () => {
@@ -79,14 +69,7 @@ class Articals extends Component{
                     }else{
                         console.log('没数据了');
                     }
-                    
-                
                 })
-                // this.setState({
-                //     isBottom:false,
-                // })
-
-            //   console.log('到底');
           }
         }
     }
@@ -97,7 +80,6 @@ class Articals extends Component{
     }
 
     change(tab){
-        console.log('a',tab);
         this.setState({
             id:tab.id
         })
@@ -105,7 +87,6 @@ class Articals extends Component{
         document.body.scrollTop = document.documentElement.scrollTop = 440
     }
     render(){
-        // console.log('props',this.props);
         const {articalList} = this.state
         const {column} = this.props;
         const name = column.map(item=>{
@@ -126,14 +107,10 @@ class Articals extends Component{
                         marginLeft:26
                     }} 
                     onChange={this.change} 
-                    // renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}
-                    >
-                    {/* {this.renderContent} */}
-                    
+                    > 
                 </Tabs>
                 <div className="content">
                     {
-                        
                         articalList.map((it,idx)=>{
                             return (
                                 <div className="artical" key={it.data.id +''+ idx}>
@@ -163,11 +140,8 @@ class Articals extends Component{
                                 </div>
                             )
                         })
-                        
-
                     }
                     </div>
-                    
             </div>
        )
     }

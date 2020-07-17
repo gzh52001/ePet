@@ -1,18 +1,10 @@
 import React,{Component} from 'react';
 import { NavBar, Icon } from 'antd-mobile';
 import Tabbar from '@/components/Tabbar';
-import { SettingOutlined,MessageOutlined,CheckCircleFilled,PayCircleFilled,SketchOutlined,WalletOutlined,FileTextOutlined,WhatsAppOutlined,DribbbleOutlined,CarOutlined } from '@ant-design/icons';
+import { SettingOutlined,MessageOutlined,CheckCircleFilled,PayCircleFilled,SketchOutlined,WalletOutlined,FileTextOutlined,WhatsAppOutlined,DribbbleOutlined,CarOutlined,HomeOutlined,AppstoreOutlined,ShoppingCartOutlined,UserOutlined } from '@ant-design/icons';
 import mine from '@/api/mine';
 import './mine.scss'
 class Mine extends Component{
-    // async testData(){
-    //     try{
-    //       let p = await test.getList()
-    //       console.log(p,'111');
-    //     }catch(err){
-    //       console.log(err),'222';
-    //     }
-    // }
     constructor(){
         super();
         this.state={
@@ -38,11 +30,21 @@ class Mine extends Component{
                     icon:<DribbbleOutlined style={{fontSize:22}}/>
                 },
             ],
-            myService:[]
+            myService:[],
+            isShow:false
         },
         this.getService = this.getService.bind(this)
+        this.show = this.show.bind(this)
+        this.toPage = this.toPage.bind(this)
     }
-    
+    show(){
+        this.setState({
+            isShow: !this.state.isShow
+        })
+    }
+    toPage(path){
+        this.props.history.push(path)
+    }
     async getService(){
         try{
             let p = await mine.getService();
@@ -58,8 +60,9 @@ class Mine extends Component{
     componentDidMount(){
         this.getService()
     }
+    
     render(){
-        const {myorders,myService} = this.state
+        const {myorders,myService,isShow} = this.state
         return(
             <div className="mine">
                 {/* 头部 */}
@@ -67,12 +70,31 @@ class Mine extends Component{
                     style={{height:50}}
                     mode="light"
                     icon={<Icon type="left" style={{color:'#333'}}/>}
-                    onLeftClick={() => console.log('onLeftClick')}
+                    onLeftClick={() => this.props.history.go(-1)}
                     rightContent={[
-                        <Icon key="0" type="ellipsis" style={{color:'#333'}}/>,
+                        <Icon key="0" type="ellipsis" style={{color:'#333'}} onClick={this.show}/>,
                     ]}
-                    >我的e宠
+                    >我的E宠
                 </NavBar>
+                {/* 点击出现新导航 */}
+                <nav style={{display:`${isShow?'block':'none'}`}}>
+                    <li className="navlist" onClick={this.toPage.bind(null,'/home')}>
+                        <HomeOutlined />
+                        <span>首页</span>
+                    </li>
+                    <li className="navlist" onClick={this.toPage.bind(null,'/sort')}>
+                        <AppstoreOutlined />
+                        <span>分类</span>
+                    </li>
+                    <li className="navlist" onClick={this.toPage.bind(null,'/cart')}>
+                        <ShoppingCartOutlined />
+                        <span>购物车</span>
+                    </li>
+                    <li className="navlist">
+                        <UserOutlined />
+                        <span>我的e宠</span>
+                    </li>
+                </nav>
                 {/* 用户信息 */}
                 <div className="userInfo">
                     <p className="setting">
