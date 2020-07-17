@@ -103,7 +103,7 @@ class Mine extends Component{
                     </p>
                     <div className="uploadImg">
                         <img src="https://static.epetbar.com/static_wap/appmall/avatar/dog.png" />
-                        <p className="login">
+                        <p className="login_mine">
                             <span>登录</span>
                             <span>|</span>
                             <span>注册</span>
