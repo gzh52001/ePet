@@ -1,5 +1,5 @@
 @function vw($px){
-  @return ($px / 750) * 100vw
+  @return ($px / 375) * 100vw
 }
 
 .App{

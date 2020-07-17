@@ -1,0 +1,42 @@
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+
+.login{
+    height: 100vh;
+    background-color: #fff;
+    nav{
+        width: 100%;
+        height: vw(65);
+        padding: vw(10) 0;
+        li{
+            float: left;
+            text-align: center;
+            width: 25%;
+            
+            svg{
+                width: vw(22);
+                height: vw(22);
+                color: #888;
+            }
+            span{
+                display: block;
+            }
+        }
+    }
+    .login_box{
+        width: 100%;
+        
+        .login-form{
+            padding: vw(50) 0;
+            text-align: center;
+            background-color: #fff;
+            .ant-input-affix-wrapper{
+                width: 60%;
+            }
+            .to_reg{
+                color: rgb(64, 64, 160);
+            } 
+        }
+    }
+}
