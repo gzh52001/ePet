@@ -1,5 +1,4 @@
 import request from '@/utils/requestLocal';
-import Reg from '../pages/Reg';
 export default {
     checkname(name){
         return request({
@@ -15,6 +14,23 @@ export default {
                 name,
                 psw
             }
+        });
+    },
+    userLogin(name,psw,keep){
+        return request({
+            method: "post",
+            url:'user/login',
+            data:{
+                name,
+                psw,
+                keep
+            }
+        });
+    },
+    checkToken(token){
+        return request({
+            method: "get",
+            url:'user//verify?token='+token,
         });
     }
 }

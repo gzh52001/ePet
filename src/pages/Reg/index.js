@@ -2,7 +2,7 @@ import React,{Component,useState,useEffect} from 'react';
 import { NavBar, Icon, Toast } from 'antd-mobile';
 import { UserOutlined,HomeOutlined,AppstoreOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
-import { JSEncrypt } from 'jsencrypt';
+import MD5 from 'crypto-js/md5'
 import './reg.scss';
 import userApi from '@/api/user'
 
@@ -28,13 +28,8 @@ function Reg (props){
     const onFinish = async values => {
         console.log('Received values of form: ', values);
         let name = values.username;
-        var encrypt = new JSEncrypt();
-        let pub = `-----BEGIN PUBLIC KEY-----
-        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJBd9roCW5AB7s2CDknXLaK2WUgRiVrxZsjHve/lspba2U6tIle3H2SmPdXtCowRwUeE2VF9S5MkZ5YNusHa81XpOMoaEBJ2h1KakMFZlkNXsl0LJs2bpRg8F7j+cpPGuL8MseV41odgR/MX8tO16dMrLB6FFjF/CNYEvx97yHRwIDAQAB
-        -----END PUBLIC KEY-----`
-        encrypt.setPublicKey(pub);
-        let psw = encrypt.encrypt(values.confirm); //values.confirm为需要加密的字段
-        // console.log(name,psw);
+        let psw = MD5(values.confrim).toString()
+        console.log(name,psw);
         try{
             let p = await userApi.userReg(name,psw);
             if(p.data.code == 200){

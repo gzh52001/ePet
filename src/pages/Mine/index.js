@@ -1,9 +1,10 @@
-import React,{Component} from 'react';
+import React,{Component, useReducer} from 'react';
 import { NavBar, Icon } from 'antd-mobile';
 import Tabbar from '@/components/Tabbar';
-import { SettingOutlined,MessageOutlined,CheckCircleFilled,PayCircleFilled,SketchOutlined,WalletOutlined,FileTextOutlined,WhatsAppOutlined,DribbbleOutlined,CarOutlined,HomeOutlined,AppstoreOutlined,ShoppingCartOutlined,UserOutlined } from '@ant-design/icons';
+import { SettingOutlined,MessageOutlined,CheckCircleFilled,PayCircleFilled,SketchOutlined,WalletOutlined,FileTextOutlined,WhatsAppOutlined,DribbbleOutlined,CarOutlined,HomeOutlined,AppstoreOutlined,ShoppingCartOutlined,UserOutlined,StarFilled } from '@ant-design/icons';
 import mine from '@/api/mine';
 import './mine.scss'
+import user from '../../api/user';
 class Mine extends Component{
     constructor(){
         super();
@@ -31,11 +32,13 @@ class Mine extends Component{
                 },
             ],
             myService:[],
-            isShow:false
+            isShow:false,
+            user:{}
         },
         this.getService = this.getService.bind(this)
         this.show = this.show.bind(this)
         this.toPage = this.toPage.bind(this)
+        this.getUser = this.getUser.bind(this)
     }
     show(){
         this.setState({
@@ -45,11 +48,10 @@ class Mine extends Component{
     toPage(path){
         this.props.history.push(path)
     }
-    async getService(){
+    async getService(){//获取我的服务
         try{
             let p = await mine.getService();
             console.log(p.data.list[3].data.items);
-            // this.state.myService = p.data.list[3].data.items
             this.setState({
                 myService : p.data.list[3].data.items
             })
@@ -57,12 +59,26 @@ class Mine extends Component{
             console.log(err);
         }
     }
+
+    getUser(){
+        let res = localStorage.getItem('ep-username')
+        console.log(JSON.parse(res));
+        if(res){
+            this.setState({
+                user:{
+                    ...user,
+                    username:JSON.parse(res)
+                }
+            })
+        }
+    }
     componentDidMount(){
         this.getService()
+        this.getUser()
     }
     
     render(){
-        const {myorders,myService,isShow} = this.state
+        const {myorders,myService,isShow,user} = this.state
         return(
             <div className="mine">
                 {/* 头部 */}
@@ -101,14 +117,39 @@ class Mine extends Component{
                         <SettingOutlined />
                         <MessageOutlined />
                     </p>
-                    <div className="uploadImg">
-                        <img src="https://static.epetbar.com/static_wap/appmall/avatar/dog.png" />
-                        <p className="login_mine">
-                            <span>登录</span>
-                            <span>|</span>
-                            <span>注册</span>
-                        </p>
-                    </div>
+                    {
+                        user.username ?
+                        <div className="loginUser">
+                            <img src="https://img2.epetbar.com/dogs/1.jpg" />
+                            <div>
+                                <p className="userName">
+                                    {user.username}
+                                </p>
+                                <p className="userMore">
+                                    <i>
+                                    <StarFilled /> 0
+                                    </i>
+                                    <span className="petVal">
+                                        宠值 0
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        :
+                        <div className="uploadImg">
+                            <img src="https://static.epetbar.com/static_wap/appmall/avatar/dog.png" />
+                            <p className="login_mine">
+                                <span onClick={()=>{
+                                    this.toPage('/login')
+                                }}>登录</span>
+                                <span>|</span>
+                                <span onClick={()=>{
+                                    this.toPage('/reg')
+                                }}>注册</span>
+                            </p>
+                        </div>
+                    }
+                    
                     <div className="more">
                         <span><CheckCircleFilled /><i>每日签到</i></span>
                         <span><PayCircleFilled /><i>0元兑礼</i></span>

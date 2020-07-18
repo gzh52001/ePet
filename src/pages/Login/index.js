@@ -1,23 +1,48 @@
 import React,{Component, useState} from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
-import { NavBar, Icon } from 'antd-mobile';
+import { NavBar, Icon, Toast } from 'antd-mobile';
 import { UserOutlined, LockOutlined,HomeOutlined,AppstoreOutlined,ShoppingCartOutlined } from '@ant-design/icons';
-import './login.scss'
-// import Tabbar from '@/components/Tabbar'
-// class Login extends Component{
-//     render(){
-//         return(
-//             <div>Login
-//                 {/* <Tabbar/> */}
-//             </div>
-//         )
-//     }
-// }
+import MD5 from 'crypto-js/md5'; //md5加密
+import './login.scss';
+import userApi from '@/api/user'
+import useStorage from '@/Hook'
+
 
 function Login (props){
     const [isShow,show] = useState(false)
-    const onFinish = values => {
+    const [val,setItem] = useStorage('uid')
+    const onFinish = async values => {
         console.log('Received values of form: ', values);
+        let name = values.username;
+        let keep = values.remember;
+        let psw = MD5(values.confrim).toString()
+        console.log(name,psw,keep);
+        try{
+            let p = await userApi.userLogin(name,psw,keep)
+            console.log(p.data);
+            if(p.data.code == 200){
+                let { uid, username, token} = p.data.data;
+                userApi.checkToken(token).then(res=>{
+                    if(res.data.code == 200){//验证成功
+                        setItem('ep-uid',uid)
+                        setItem('ep-username',username)
+                        setItem('ep-token',token)
+                        Toast.success('登录成功');
+                        setTimeout(()=>{
+                            props.history.push('home')
+                        },1000)
+                    }else{
+                        Toast.fail('登录失效，请重新登录');
+                    }
+                })
+            }else if(p.data.code == 300){
+                Toast.fail('用户不存在或密码错误')
+            }else{
+                Toast.fail('服务器出错')
+            }
+        }catch(err){
+            console.log(err);
+        }
     };
     
     const toPage = (path)=>{
@@ -91,6 +116,10 @@ function Login (props){
                         type="password"
                         placeholder="密码"
                         />
+                    </Form.Item>
+
+                    <Form.Item name="remember" valuePropName="checked" className="keep">
+                        <Checkbox>7天免登录</Checkbox>
                     </Form.Item>
 
                     <Form.Item>

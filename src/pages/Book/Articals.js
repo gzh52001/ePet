@@ -57,13 +57,8 @@ class Articals extends Component{
                     // console.log('res',res);
                     if(res.data.data.list.length){
                         let arr = res.data.data.list.filter(item=>item.type!=3)
-                        // console.log('arr',arr);
-                        let list =[]
-                        arr.forEach(item=>{
-                            list.push(item)
-                        })
                         this.setState({
-                            articalList : [...this.state.articalList,...list],
+                            articalList : [...this.state.articalList,...arr],
                             isBottom:false
                         })
                     }else{

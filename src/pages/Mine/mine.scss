@@ -36,7 +36,7 @@
             font-size: 22px;
             color: #fff;
         }
-        .uploadImg{
+        .uploadImg{//未登录时
             margin: vw(30) vw(12) 0 vw(12);
             height: vw(70);
             img{
@@ -55,6 +55,46 @@
                 }
             }
         }
+        .loginUser{//登录后
+            margin: vw(30) vw(12) 0 vw(12);
+            height: vw(70);
+            img{
+                width: vw(70);
+                height: vw(70);
+                float: left;
+                border-radius: 50%;
+            }
+            div{
+                // clear: both;
+                float: left;
+                margin-left: vw(10);
+                // font-size: 16px;
+                color: #fff;
+                .userName{
+                    font-size: vw(20);
+                    margin: 0;
+                }
+                .userMore{
+                    font-size: vw(14);
+                    margin-top: vw(2);
+                    i{
+                        display: inline-block;
+                        padding: 0 vw(10);
+                        background-color: rgb(238, 193, 80);
+                        border-radius: vw(14);
+                        color: red;
+                        margin-right: vw(10);
+                    }
+                    .petVal{
+                        display: inline-block;
+                        font-size: vw(12);
+                        padding: 0 vw(10);
+                        background-color: indianred;
+                        border-radius: vw(14);
+                    }
+                }
+            }
+        }
         .more{
             height: vw(36);
             margin: vw(22) vw(6) 0 vw(6);
@@ -62,6 +102,7 @@
             border-radius: vw(14) vw(14) 0 0;
             color: rgb(218, 184, 100);
             line-height: vw(36);
+            clear: both;
             span{
                 margin-left: vw(10);
                 i{
