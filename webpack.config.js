@@ -19,7 +19,12 @@ module.exports={
               target: "https://mall.api.epet.com",
               changeOrigin: true,
               pathRewrite: {"^/api" : "/"}
-            }
+            },
+            "/local":{
+                target: "http://localhost:6767",
+                changeOrigin: true,
+                pathRewrite: {"^/local" : "/"}
+              },
           }
     },
     //重命名路径

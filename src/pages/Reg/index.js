@@ -1,24 +1,18 @@
-import React,{Component,useState} from 'react';
-import { NavBar, Icon } from 'antd-mobile';
+import React,{Component,useState,useEffect} from 'react';
+import { NavBar, Icon, Toast } from 'antd-mobile';
 import { UserOutlined,HomeOutlined,AppstoreOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
-import './reg.scss'
+import { JSEncrypt } from 'jsencrypt';
+import './reg.scss';
+import userApi from '@/api/user'
 
 function Reg (props){
+    const [form] = Form.useForm();
     const [isShow,show] = useState(false)
+
     const toPage = (path)=>{
         props.history.push(path)
     }
-    // const formItemLayout = {
-    //     labelCol: {
-    //       xs: { span: 24 },
-    //       sm: { span: 8 },
-    //     },
-    //     wrapperCol: {
-    //       xs: { span: 24 },
-    //       sm: { span: 16 },
-    //     },
-    // };
     const tailFormItemLayout = {
         wrapperCol: {
           xs: {
@@ -31,10 +25,44 @@ function Reg (props){
           },
         },
     };
-    const [form] = Form.useForm();
-    const onFinish = values => {
+    const onFinish = async values => {
         console.log('Received values of form: ', values);
+        let name = values.username;
+        var encrypt = new JSEncrypt();
+        let pub = `-----BEGIN PUBLIC KEY-----
+        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJBd9roCW5AB7s2CDknXLaK2WUgRiVrxZsjHve/lspba2U6tIle3H2SmPdXtCowRwUeE2VF9S5MkZ5YNusHa81XpOMoaEBJ2h1KakMFZlkNXsl0LJs2bpRg8F7j+cpPGuL8MseV41odgR/MX8tO16dMrLB6FFjF/CNYEvx97yHRwIDAQAB
+        -----END PUBLIC KEY-----`
+        encrypt.setPublicKey(pub);
+        let psw = encrypt.encrypt(values.confirm); //values.confirm为需要加密的字段
+        // console.log(name,psw);
+        try{
+            let p = await userApi.userReg(name,psw);
+            if(p.data.code == 200){
+                Toast.success('注册成功，正在跳转至登录页', 2);
+                setTimeout(()=>{
+                    props.history.push('/login')
+                },2000)
+            }else{
+                Toast.fail('注册失败', 2);
+            }
+        }catch(err){
+            console.log(err);
+        }
     };
+    const checkname = async (rule, value, callback) => { //表单校验用户名是否存在
+        try {
+            let p = await userApi.checkname(value)
+            if(p.data.code == 200){
+                return Promise.resolve();
+            }else if(p.data.code == 300){
+                return Promise.reject('该用户名已存在');
+            }else if(p.data.code == 5000){
+                return Promise.reject('服务器出错');
+            }
+        } catch (err) {
+            return Promise.reject('err');
+        }
+      }
     return(
         <div className="reg">
             <NavBar
@@ -79,15 +107,29 @@ function Reg (props){
                 {/* 用户名 */}
                 <Form.Item
                     name="username"
+                    validateFirst = {true}
                     rules={[
+                    {
+                        whitespace:true,
+                        message: '请勿输入空格',
+                    },
+
                     {
                         required: true,
                         message: '请输入用户名!',
                     },
+                    {
+                        validator: checkname
+                    }
                     ]}
                     label="用户名"
+                    hasFeedback
+                    
+                    // help="用户名已存在"
                 >
-                    <Input />
+                    <Input onBlur={()=>{
+                        form.validateFields(['username']);
+                    }}/>
                 </Form.Item>
                 {/* 密码 */}
                 <Form.Item
