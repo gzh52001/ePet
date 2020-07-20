@@ -227,7 +227,6 @@ class Detail extends Component {
     }
     render() {
         let { tabNum, tablist, imgList, imgindex, detailedData, price, time, format, ishave, openWin, styleNum, id } = this.state
-        console.log(this.props)
         return (
             <div className='fater'>
                 {/* 头部 */}
