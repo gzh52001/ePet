@@ -1,0 +1,20 @@
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+.first{
+    height: vw(45);
+    background: #fff;
+    color: #58bc58;
+    border: none;
+    border-bottom: vw(3) solid #58bc58;
+    font-size: vw(14);
+    margin-right: vw(10);
+}
+.second{
+    height: vw(45);
+    background:#fff;
+    font-size: vw(14);
+    color: #333;
+    margin-right: vw(10);
+    border: none;
+}
