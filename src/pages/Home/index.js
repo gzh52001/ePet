@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import Tabbar from '@/components/Tabbar'
 import "../Home/index.scss"
-import { Carousel,Tag  } from 'antd';
+import { Carousel, Tag } from 'antd';
 import { SearchOutlined, MessageOutlined } from "@ant-design/icons"
 import Api from "../../api/test"
 import goodApi from "../../api/index"
+// import { connect } from "react-redux"
+// import store from "../../store"
+
+
 class Home extends Component {
     constructor() {
         super()
@@ -25,21 +29,24 @@ class Home extends Component {
         this.windowscolltop()
     }
     componentDidMount() {
+        console.log(this.props)
         Api.indexlist().then(res => {
             console.log(res.data.datas.list)
             this.setState({
-                shop: res.data.datas.list[9],
-                shoptitle: res.data.datas.list[9].data.title,
-                shoptitle2: res.data.datas.list[9].data.stateTitle,
-                shoplistes: res.data.datas.list[9].data.goods,
-                banner: res.data.datas.list[8].data.images,
-                newbanner: res.data.datas.list[11].data.ranklist[0].list,
-                newbanner2: res.data.datas.list[11].data.ranklist[1].list,
-                newbanner3: res.data.datas.list[11].data.ranklist[2].list,
+                shop: res.data.datas.list[6],
+                shoptitle: res.data.datas.list[6].data.title,
+                shoptitle2: res.data.datas.list[6].data.stateTitle,
+                shoplistes: res.data.datas.list[6].data.goods,
+                banner: res.data.datas.list[5].data.images,
+                newbanner: res.data.datas.list[8].data.ranklist[0].list,
+                newbanner2: res.data.datas.list[8].data.ranklist[1].list,
+                newbanner3: res.data.datas.list[8].data.ranklist[2].list,
             })
         })
     }
-    
+    gogoods = (id) => {
+        this.props.history.push("/detail/" + id)
+    }
     windowscolltop = () => {
         window.onscroll = () => {
             //吸顶变色
@@ -63,7 +70,6 @@ class Home extends Component {
                     isclose: false,
                     page: this.state.page + 1
                 })
-                console.log(this.state.page)
                 if (this.state.page - i == 1) {
                     let p = goodApi.goodslist(this.state.page).then(res => {
                         let list = []
@@ -75,7 +81,6 @@ class Home extends Component {
                         this.setState({
                             goodslist: lists
                         })
-                        console.log(this.state.goodslist)
                         if (this.state.page < 2) {
                             this.setState({
                                 isclose: true
@@ -83,9 +88,9 @@ class Home extends Component {
                             this.windowscolltop(this.state.page)
                         }
                     })
-                    .catch(err => {
-                        console.log(err)
-                    })
+                        .catch(err => {
+                            console.log(err)
+                        })
                 }
             }
         }
@@ -360,17 +365,17 @@ class Home extends Component {
                     </div>
                     <div className="goods">
                         {
-                            this.state.goodslist.map(item =>(<div className="goods-list" key={item.gid}>
-                                    <div className="goodsimg">
-                                        <img src={item.img_url} />
-                                    </div>
-                                    <div className="goodstext">
-                                        <h3>{item.title}</h3>
-                                        <Tag className="goods_properties">
-                                            {item.goods_properties}
-                                        </Tag>
-                                        <h4>¥{item.price}</h4>
-                                    </div>
+                            this.state.goodslist.map(item => (<div className="goods-list" key={item.gid} onClick={this.gogoods.bind(null, item.gid)}>
+                                <div className="goodsimg">
+                                    <img src={item.img_url} />
+                                </div>
+                                <div className="goodstext">
+                                    <h3>{item.title}</h3>
+                                    <Tag className="goods_properties">
+                                        {item.goods_properties}
+                                    </Tag>
+                                    <h4>¥{item.price}</h4>
+                                </div>
                             </div>))
                         }
                     </div>
