@@ -1,10 +1,11 @@
-import React,{Component, useReducer} from 'react';
-import { NavBar, Icon } from 'antd-mobile';
+import React,{Component} from 'react';
+import { NavBar, Icon, Toast } from 'antd-mobile';
 import Tabbar from '@/components/Tabbar';
 import { SettingOutlined,MessageOutlined,CheckCircleFilled,PayCircleFilled,SketchOutlined,WalletOutlined,FileTextOutlined,WhatsAppOutlined,DribbbleOutlined,CarOutlined,HomeOutlined,AppstoreOutlined,ShoppingCartOutlined,UserOutlined,StarFilled } from '@ant-design/icons';
 import mine from '@/api/mine';
-import './mine.scss'
+import './mine.scss';
 import user from '../../api/user';
+
 class Mine extends Component{
     constructor(){
         super();
@@ -39,6 +40,7 @@ class Mine extends Component{
         this.show = this.show.bind(this)
         this.toPage = this.toPage.bind(this)
         this.getUser = this.getUser.bind(this)
+        this.toSetting = this.toSetting.bind(this)
     }
     show(){
         this.setState({
@@ -70,6 +72,15 @@ class Mine extends Component{
                     username:JSON.parse(res)
                 }
             })
+        }
+    }
+    toSetting(){
+        let res = localStorage.getItem('ep-username')
+        if(res){
+            this.toPage("/setting")
+        }else{
+            Toast.info('请先登录',1)
+            this.toPage('/login')
         }
     }
     componentDidMount(){
@@ -114,7 +125,7 @@ class Mine extends Component{
                 {/* 用户信息 */}
                 <div className="userInfo">
                     <p className="setting">
-                        <SettingOutlined />
+                        <SettingOutlined onClick={()=>{this.toSetting()}}/>
                         <MessageOutlined />
                     </p>
                     {
@@ -190,6 +201,7 @@ class Mine extends Component{
                     </ul>
                 </div>
                 <Tabbar/>
+                
             </div>
             
         )

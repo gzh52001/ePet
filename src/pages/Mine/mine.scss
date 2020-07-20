@@ -175,3 +175,44 @@
         }
     }
 }
+
+.setting{
+    nav{
+        width: 100%;
+        height: vw(65);
+        padding: vw(10) 0;
+        li{
+            float: left;
+            text-align: center;
+            width: 25%;
+            
+            svg{
+                width: vw(22);
+                height: vw(22);
+                color: #888;
+            }
+            span{
+                display: block;
+            }
+        }
+    }
+    .setting_detail{
+        .my-list{
+            .am-list-extra{
+                text-align: right;
+                padding: 0;
+                img{
+                    // margin: 0;
+                    display: inline-block;
+                    width: vw(34);
+                    height: vw(34);
+                }
+            }
+        }
+    }
+    .logout{
+        margin-top: vw(30);
+        border-radius: vw(30);
+        font-size: vw(15);
+    }
+}

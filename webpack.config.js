@@ -25,7 +25,7 @@ module.exports={
                 changeOrigin: true,
                 pathRewrite: {"^/local" : "/"}
               },
-          }
+        }
     },
     //重命名路径
     resolve:{

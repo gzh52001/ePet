@@ -8,6 +8,7 @@ import Sort from '@/pages/Sort';
 import Cart from '@/pages/Cart';
 import Login from '@/pages/Login';
 import Reg from '@/pages/Reg';
+import Setting from '@/pages/Mine/Setting'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/cart' component={Cart}></Route>
         <Route path='/login' component={Login}></Route>
         <Route path='/reg' component={Reg}></Route>
+        <Route path='/setting' component={Setting}/>
         <Redirect from='/' to='/home' exact></Redirect>
       </Switch>
     </div>
