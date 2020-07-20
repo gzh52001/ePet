@@ -33,14 +33,14 @@ class Home extends Component {
         Api.indexlist().then(res => {
             console.log(res.data.datas.list)
             this.setState({
-                shop: res.data.datas.list[6],
-                shoptitle: res.data.datas.list[6].data.title,
-                shoptitle2: res.data.datas.list[6].data.stateTitle,
-                shoplistes: res.data.datas.list[6].data.goods,
-                banner: res.data.datas.list[5].data.images,
-                newbanner: res.data.datas.list[8].data.ranklist[0].list,
-                newbanner2: res.data.datas.list[8].data.ranklist[1].list,
-                newbanner3: res.data.datas.list[8].data.ranklist[2].list,
+                shop: res.data.datas.list[8],
+                shoptitle: res.data.datas.list[8].data.title,
+                shoptitle2: res.data.datas.list[8].data.stateTitle,
+                shoplistes: res.data.datas.list[8].data.goods,
+                banner: res.data.datas.list[7].data.images,
+                newbanner: res.data.datas.list[10].data.ranklist[0].list,
+                newbanner2: res.data.datas.list[10].data.ranklist[1].list,
+                newbanner3: res.data.datas.list[10].data.ranklist[2].list,
             })
         })
     }
@@ -285,7 +285,7 @@ class Home extends Component {
                         <div className="newbanner-1">
                             <img className="newbannerimg" src="https://static.epetbar.com/static_wap/ranking/homePage/cate.png?version=03" />
                             <img className="newbannerimg2" src="https://static.epetbar.com/static_wap/ranking/homePage/trophy.png?version=03" />
-                            <Carousel className="newbanner1" autoplay dots={false}>
+                            <Carousel className="newbanner1" autoplay dots={false} autoplaySpeed={4000}>
                                 {
                                     this.state.newbanner.map(item => (<div className="newbanner1-1" key={item.second_cate}>
                                         <div className="bannertext">
@@ -304,7 +304,7 @@ class Home extends Component {
                         <div className="newbanner-1">
                             <img className="newbannerimg" src="https://static.epetbar.com/static_wap/ranking/homePage/breed.png?version=03" />
                             <img className="newbannerimg2" src="https://static.epetbar.com/static_wap/ranking/homePage/trophy.png?version=03" />
-                            <Carousel className="newbanner1" autoplay dots={false}>
+                            <Carousel className="newbanner1" autoplay dots={false} autoplaySpeed={7000}>
                                 {
                                     this.state.newbanner2.map(item => (<div className="newbanner1-1" key={item.second_cate}>
                                         <div className="bannertext">
@@ -323,7 +323,7 @@ class Home extends Component {
                         <div className="newbanner-1">
                             <img className="newbannerimg" src="https://static.epetbar.com/static_wap/ranking/homePage/custom.png?version=03" />
                             <img className="newbannerimg2" src="https://static.epetbar.com/static_wap/ranking/homePage/trophy.png?version=03" />
-                            <Carousel className="newbanner1" autoplay dots={false}>
+                            <Carousel className="newbanner1" autoplay dots={false} autoplaySpeed={9000}>
                                 {
                                     this.state.newbanner3.map(item => (<div className="newbanner1-1" key={item.second_cate}>
                                         <div className="bannertext">

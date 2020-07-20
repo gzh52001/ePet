@@ -40,6 +40,18 @@ function reducer(state = initState, action) {
                 })
             }
         }
+        case "changqtys":{
+            console.log(action)
+            return {
+                ...state,
+                goodslist: state.goodslist.map(item => {
+                    if (item.gid === action.gid) {
+                        item.goodqty = item.goodqty + action.goodqty
+                    }
+                    return item
+                })
+            }
+        }
         case "checks" :{
             // let check = action.gid
             // action.gid = action.goodcheck

@@ -17,5 +17,12 @@ export default {
             method:"get",
             url:"/v3/index/home.html?pet_type=dog&version=515&is_single=0&isWeb=1&system=wap&distinct_id=17345ad092a5b5-0d80483e030eb6-f7d123e-2073600-17345ad092b64c"
         })
-    }
+    },
+    //详细页
+    getgoodslist(gid){
+        return request({
+            method : "get",
+            url:"v3/goods/detail/main.html?do=GetDynamic&gid="+gid+"&extend_pam=buytype%3Adiscount%7Catid%3A27192&version=410&system=wap&isWeb=1&distinct_id=17345ad092a5b5-0d80483e030eb6-f7d123e-2073600-17345ad092b64c&_=1595244386718"
+        })
+    },
 }

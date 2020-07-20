@@ -7,35 +7,6 @@ import store from "../../store"
 import goodApi from "../../api/index"
 
 
-
-let goodsd = []
-let uid = localStorage.getItem("ec-uid")
-let p = goodApi.getshoplist(uid).then(res => {
-    let list = []
-    if (res.data.flag) {
-        for (let i = 0; i < res.data.data.p.length; i++) {
-            list.push(res.data.data.p[i])
-        }
-        for (let i = 0; i < list.length; i++) {
-            goodsd = list[i]
-            store.dispatch({
-                type: 'addshop',
-                goods: {
-                    gid: goodsd.gid,
-                    goodname: goodsd.goodname,
-                    goodprice: goodsd.goodprice,
-                    goodimgurl: goodsd.goodimgurl,
-                    goodqty: goodsd.goodqty,
-                    goodtitle: goodsd.goodtitle,
-                    uid: localStorage.getItem("ec-uid"),
-                    goodcheck: goodsd.goodcheck
-                }
-            });
-        }
-    }
-})
-
-
 class Cart extends Component {
     constructor() {
         super()
@@ -149,7 +120,7 @@ class Cart extends Component {
     };
     //确认删除全部商品
     handleOk = e => {
-        let uid = localStorage.getItem("ec-uid")
+        let uid = localStorage.getItem("ep-uid")
         let p = goodApi.shoplisrclear(uid).then(res => {
             console.log(res)
         })
@@ -171,7 +142,7 @@ class Cart extends Component {
     
     //修改数量
     onChange(value, gid) {
-        let uid = localStorage.getItem("ec-uid")
+        let uid = localStorage.getItem("ep-uid")
         let goodqty = value
         let p = goodApi.shoplistput(uid, goodqty, gid).then(res => {
             console.log(res)
@@ -188,7 +159,7 @@ class Cart extends Component {
     }
     //删除指定商品
     removegoods = (gid) => {
-        let uid = localStorage.getItem("ec-uid")
+        let uid = localStorage.getItem("ep-uid")
         let p = goodApi.shoplistremove(uid, gid).then(res => {
             console.log(res)
         }).catch(err => {
@@ -202,18 +173,6 @@ class Cart extends Component {
     }
     //隐藏nav开关
     openbox = () => {
-        // store.dispatch({
-        //     type: 'addshop',
-        //     goods: {
-        //         gid: 3,
-        //         goodname: '2019新款外套男韩版潮流休闲帅气工装夹克男士灯芯绒春秋季上衣服 咖啡色 XL',
-        //         goodprice: 1558.00,
-        //         goodimgurl: 'https://www.nanshig.com/data/upload/shop/store/goods/45/45_06266617413539238_360.jpg',
-        //         goodqty: 1,
-        //         goodtitle: "1",
-        //         uid: localStorage.getItem("ec-uid")
-        //     }
-        // });
         if (this.state.isclose) {
             this.setState({
                 isclose: false
@@ -241,6 +200,7 @@ class Cart extends Component {
         })
     }
     render() {
+        console.log(this.props)
         return (
             <div>
                 <div className="shophead">
@@ -315,6 +275,7 @@ class Cart extends Component {
                         </Modal>
                     </div>
                 </div>
+                <div className="bottom"></div>
             </div>
         )
     }
