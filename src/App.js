@@ -1,5 +1,5 @@
 import React from 'react';
-import {withRouter,Switch,Route,Redirect} from 'react-router-dom'
+import { withRouter, Switch, Route, Redirect } from 'react-router-dom'
 import './assets/App.scss';
 import Home from '@/pages/Home';
 import Mine from '@/pages/Mine';
@@ -12,6 +12,9 @@ import Setting from '@/pages/Mine/Setting'
 import Search from '@/pages/Search';
 import GoodsList from '@/pages/GoodsList';
 import Detail from '@/pages/detail';
+// import Good from "./pages/Good"
+import { connect } from "react-redux"
+import "./assets/flexible"
 
 function App() {
   return (
@@ -34,6 +37,13 @@ function App() {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    carlist:state.goodslist
+  }
+}
 
+App = connect(mapStateToProps)(App)
 App = withRouter(App)
+
 export default App;

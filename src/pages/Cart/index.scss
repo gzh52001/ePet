@@ -1,0 +1,264 @@
+
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+
+
+.shophead{
+    width: 100%;
+    height: vw(50);
+    background: #fff;
+    line-height: 50px;
+    color: #333;
+    position: relative;
+    display: flex;
+    .shophead-left {
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        left: 10px;
+        top: 7px;
+        background-position: 0 0;
+        .anticon-left svg{
+            width: 20px;
+            height: 20px;
+        }
+    }
+    .shophead-text{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        margin: 0 65px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: 50px;
+        font-size: 18px;
+        color: #333;
+    }
+    .shophead-right {
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        background-position: 0 0;
+        .anticon-message svg{
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.shopnav{
+    display: none;
+    height: vw(65);
+    background: #fff;
+    text-align: center;
+    margin: 0 5px;
+    a{  
+        float: left;
+        width: vw(90);
+        height: vw(65);
+        font-size: 14px;
+        color: #666;
+        text-align: center;
+        padding-top: 11px;
+        display: block;
+        min-width: 0;
+        .anticon svg{
+            width: vw(22);
+            height: vw(22);
+        }
+        h3{
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+    }
+}
+
+.shopnull{
+    width: 100%;
+    height: vw(324);
+    .shoptext{
+        padding: 50px 0;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        img{
+            width: vw(232);
+            height: vw(139);
+        }
+        h3{
+            color: #999;
+            font-size: 12px;
+            padding-bottom: 20px;
+            margin-top: 20px;
+        }
+        .shopbtn{
+            width: vw(94);
+            height: vw(29);
+            border: 1px solid #41C856;
+            color: #51c62c;
+            border-radius: 30px;
+            background: #fff;
+        }
+    }
+}
+
+.shopmain{
+    width: 100%;
+    min-height: vw(1);
+    .shopnull2{
+        width: 100%;
+        height: vw(324);
+        .shoptext{
+            padding: 50px 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            img{
+                width: vw(232);
+                height: vw(139);
+            }
+            h3{
+                color: #999;
+                font-size: 12px;
+                padding-bottom: 20px;
+                margin-top: 20px;
+            }
+            .shopbtn{
+                width: vw(94);
+                height: vw(29);
+                border: 1px solid #41C856;
+                color: #51c62c;
+                border-radius: 30px;
+                background: #fff;
+            }
+        }
+    }
+    .ant-checkbox-wrapper{
+        width: 100%;
+        height: vw(50);
+        line-height: vw(50);
+        padding: 0 10px;
+        font-weight: 700;
+    }
+    .allprice{
+        display: flex;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 100;
+        box-shadow: 0px -1px 6px rgba(0, 0, 0, .1);
+        height: vw(50);
+        background: #fff;
+        .money{
+            width: vw(260);
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+            .moneytext{
+                margin-left: 30px;
+                font-size: 14px;
+                color: #999;
+            }
+            .moneyfuhao{
+                margin-left: 15px;
+                font-size: 12px;
+                color: red;
+            }
+            .moneys{
+                font-size: 24px ;
+                color: red;
+            }    
+        }
+        .moneybtn{
+            margin-top: 7px;
+            width: 90px;
+            height: 35px;
+            line-height: 35px;
+            padding: 0;
+            border-radius: 35px;
+            font-size: 14px;
+            margin-right: 10px;
+            text-align: center;
+            background: #41C856;
+            border: none;
+            color: #fff !important;
+        }
+        .clearall{
+            margin-top: 7px;
+            width: 90px;
+            height: 35px;
+            line-height: 35px;
+            padding: 0;
+            border-radius: 35px;
+            font-size: 12px;
+            margin-right: 10px;
+            text-align: center;
+            background: red;
+            border: none;
+            color: #fff !important;
+        }
+    }
+    .cardgoods{
+        padding: 10px;
+        height: vw(120);
+        display: flex;
+        
+        .ant-checkbox-wrapper{
+            width: vw(30);
+            height: vw(20);
+            .ant-checkbox{
+                margin-top: 40px;
+                width: vw(16);
+                height: vw(16);
+                .ant-checkbox-input{
+                    width: vw(16);
+                    height: vw(16);
+                }
+            }
+        }
+        img{
+            width: vw(90);
+            height: vw(90);
+            margin-top: 10px;
+        }
+        .cardtext{
+            position: relative;
+            width: vw(235);
+            height: vw(100);
+            h3{
+                font-size: 12px;
+                color: #333;
+                margin: 0;
+            }
+            h4{
+                font-size: 20px;
+                color: #ff5757;
+                margin: 0;
+                width: 50px;
+                position: absolute;
+                bottom: 0;
+            }
+            .ant-input-number{
+                width: vw(50);
+                height: vw(30);
+                position: absolute;
+                bottom: 0;
+                right: 85px;
+            }
+            .ant-btn{
+                height: vw(30);
+                position: absolute;
+                bottom: 0;
+                right: 20px;
+            }
+        }
+    }
+}

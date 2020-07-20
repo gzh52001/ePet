@@ -84,4 +84,6 @@ input{
     visibility: hidden;
 }
 
-
+*{
+    box-sizing: border-box;
+}
