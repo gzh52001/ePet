@@ -17,10 +17,10 @@ export default {
         })
     },
     //获取商品列表
-    getShopList(pet,type,page,id){
+    getShopList(pet,type,page,id=0,pam){
         return request({
             method: 'get',
-            url: `/v3/goods/list/main.html?version=358&brandid=0&page=${page}&orderby=${type}&cateid=${id}&pet_type=${pet}&extend_pam=&real_wid=&region=&system=wap&isWeb=1&distinct_id=1733cf1c35a315-07fe26a02d6361-5437971-250125-1733cf1c35b4a5&_=1594798554572`,
+            url: `/v3/goods/list/main.html?version=358&brandid=0&page=${page}&orderby=${type}&cateid=${id}&pet_type=${pet}&extend_pam=${pam}&real_wid=&region=&system=wap&isWeb=1&distinct_id=1733cf1c35a315-07fe26a02d6361-5437971-250125-1733cf1c35b4a5&_=1594798554572`,
           
         })
     },
@@ -30,6 +30,12 @@ export default {
             method: 'get',
             url: `/v3/goods/detail/main.html?gid=${id}&extend_pam=buytype%3A%7Ctid%3A0&version=410&system=wap&isWeb=1&distinct_id=1733cf1c35a315-07fe26a02d6361-5437971-250125-1733cf1c35b4a5&_=1594817003767`,
           
+        })
+    },
+    getDetail(id){//获取详细信息
+        return request({
+            method: 'get',
+            url: `/v3/goods.html?do=getContent&gid=${id}&id=1&system=wap&isWeb=1&version=517&distinct_id=1733cf1c35a315-07fe26a02d6361-5437971-250125-1733cf1c35b4a5`
         })
     }
 }

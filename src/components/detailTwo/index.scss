@@ -1,0 +1,11 @@
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+div{
+    width: 100%;
+    height: vw(375);
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}

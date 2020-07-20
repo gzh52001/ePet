@@ -1,0 +1,14 @@
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+input{
+    background-color: #f6f6f6;
+    width: vw(200);
+    height: vw(30);
+    border-radius: vw(5);
+}
+.tab button{
+    min-width: vw(60);
+    min-height: vw(30);
+    margin: vw(5);
+}

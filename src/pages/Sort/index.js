@@ -23,6 +23,9 @@ class Sort extends Component {
             this.props.history.push('/sort/brand')
         }
     }
+    goSearch=()=>{//去搜索页面
+        this.props.history.push('/search')
+    }
     render() {
         return (
             <div>
@@ -30,7 +33,7 @@ class Sort extends Component {
                 <NavBar
                     mode="light"
                     rightContent={[
-                        <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
+                        <Icon key="0" type="search" style={{ marginRight: '16px' }} onClick={this.goSearch} />,
                     ]}
                 >
                     <button className={this.state.num==1? 'first':'second'} onClick={this.changeRoute.bind(this,1)}>分类</button>

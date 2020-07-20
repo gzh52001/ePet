@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Input, BackTop } from 'antd';
-import { NavBar, Icon, Toast } from 'antd-mobile'
+import { NavBar, Icon, Toast,} from 'antd-mobile'
 import { RedditOutlined, UserOutlined, ShoppingCartOutlined, AppstoreOutlined, SearchOutlined, ArrowUpOutlined } from '@ant-design/icons'
 import "./index.scss"
 import one from '@/api/getsort'
@@ -8,6 +8,7 @@ class GoodsList extends Component {
     constructor() {
         super()
         this.state = {
+            uid:"",//用户id
             shopList: [],//商品列表
             type: 'def_desc',//排序的状态
             typeval: '升序',//排序的内容
@@ -49,18 +50,22 @@ class GoodsList extends Component {
         }
     }
     componentDidMount() {
-        let { match } = this.props
+        let { match,location} = this.props
         this.setState({
             shopid: match.params.id
         })
-        this.getShopList(match.params.id,"def_desc",1)//获取商品
+        let a=''
+        if(location.search.split('?')[1]){
+            a="keyword:"+location.search.split('?')[1]
+        }
+        this.getShopList(match.params.id,"def_desc",1,a)//获取商品
         this.checkScroll()//懒加载
     }
-    getShopList = async (id,type,Num) => {//获取列表
+    getShopList = async (id,type,Num,a) => {//获取列表
         let { pet, page, check } = this.state
         if (check) {
             try {
-                let p = await one.getShopList(pet, type, page, id)
+                let p = await one.getShopList(pet, type, page, id,a)
                 if (p.data.list.length) {
                     if (Num == 1) {
                         this.setState({
@@ -174,15 +179,24 @@ class GoodsList extends Component {
         };
     }
     //添加商品
-    addGoods = (item, e) => {
+    addGoods = (gid, e) => {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation()
+        let {uid} = this.state
+        if(!uid){
+            Toast.info('请登录',2)
+        }else{
+            
+        }
     }
-    goGoods = (id,price) => {//去详情页
+    goGoods = (gid,price) => {//去详情页
         this.props.history.push({ 
-            pathname:'/detail/'+id,
+            pathname:'/detail/'+gid,
             search:'?'+price,
     })
+    }
+    goSearch=()=>{//去搜索页面
+        this.props.history.push('/search')
     }
     render() {
         const { tablist, tabNum, typeval, shopList } = this.state
@@ -212,7 +226,7 @@ class GoodsList extends Component {
                     </ul>
                 </div>
                 {/* 搜素框 */}
-                <Input size="large" placeholder="点击搜素商品" prefix={<SearchOutlined />} className='search' onClick={() => { console.log(1); }} />
+                <Input size="large" placeholder="点击搜素商品" prefix={<SearchOutlined />} className='search' onClick={this.goSearch} />
                 {/* 排序栏 */}
                 <div className='order'>
                     <button className={this.state.styleNum == 0 ? 'first' : 'second'} onClick={this.changeRoute.bind(this, 0)}>默认</button>
@@ -233,7 +247,7 @@ class GoodsList extends Component {
                                         <p>{item.subject}</p>
                                         <span className='price'>价格:￥{item.sale_price}&nbsp;&nbsp;<del>{item.sale_price}</del></span>
                                         <i>{item.comments}&nbsp;&nbsp;{item.sold}</i>
-                                        <b onClick={this.addGoods.bind(this, item)}><ShoppingCartOutlined style={{ fontSize: 22 }} /></b>
+                                        <b onClick={this.addGoods.bind(this, item.gid)}><ShoppingCartOutlined style={{ fontSize: 22 }} /></b>
                                     </li>
                                 )
                             })
