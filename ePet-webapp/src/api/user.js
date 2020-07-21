@@ -30,7 +30,22 @@ export default {
     checkToken(token){
         return request({
             method: "get",
-            url:'user//verify?token='+token,
+            url:'user/verify?token='+token,
+        });
+    },
+    getUserInfo(uid){
+        return request({
+            method: "get",
+            url:'user/info?uid='+uid,
+        });
+    },
+    changeInfo(uid,obj){
+        return request({
+            method: "put",
+            url:'user/edit/' + uid,
+            data:{
+                obj
+            }
         });
     }
 }

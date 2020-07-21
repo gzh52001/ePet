@@ -1,4 +1,4 @@
-import React,{Component,useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import { NavBar, Icon, Toast } from 'antd-mobile';
 import { UserOutlined,HomeOutlined,AppstoreOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
@@ -26,10 +26,11 @@ function Reg (props){
         },
     };
     const onFinish = async values => {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         let name = values.username;
-        let psw = MD5(values.confrim).toString()
-        console.log(name,psw);
+        // console.log(values.confirm);
+        let psw = MD5(values.confirm).toString()
+        // console.log(name,psw);
         try{
             let p = await userApi.userReg(name,psw);
             if(p.data.code == 200){
@@ -44,7 +45,7 @@ function Reg (props){
             console.log(err);
         }
     };
-    const checkname = async (rule, value, callback) => { //表单校验用户名是否存在
+    const checkname = async (rule, value ) => { //表单校验用户名是否存在
         try {
             let p = await userApi.checkname(value)
             if(p.data.code == 200){
@@ -132,6 +133,10 @@ function Reg (props){
                     label="密码"
                     rules={[
                     {
+                        whitespace:true,
+                        message: '请勿输入空格',
+                    },
+                    {
                         required: true,
                         message: '请输入密码!',
                     },
@@ -147,6 +152,10 @@ function Reg (props){
                     dependencies={['password']}
                     hasFeedback
                     rules={[
+                    {
+                        whitespace:true,
+                        message: '请勿输入空格',
+                    },
                     {
                         required: true,
                         message: '请再次输入密码!',

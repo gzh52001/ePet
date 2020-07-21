@@ -20,7 +20,7 @@ class Articals extends Component{
     async getList(id,page){
         try{
             let p = await bookApi.getData(id,page)
-            console.log("getlist",p.data.data.list);
+            // console.log("getlist",p.data.data.list);
             this.setState({
                 articalList : p.data.data.list.filter(item=>item.type!=3)
             }) 

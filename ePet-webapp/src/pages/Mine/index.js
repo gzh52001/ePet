@@ -34,7 +34,8 @@ class Mine extends Component{
             ],
             myService:[],
             isShow:false,
-            user:{}
+            user:{},
+            avatar:''
         },
         this.getService = this.getService.bind(this)
         this.show = this.show.bind(this)
@@ -53,7 +54,7 @@ class Mine extends Component{
     async getService(){//获取我的服务
         try{
             let p = await mine.getService();
-            console.log(p.data.list[3].data.items);
+            // console.log(p.data.list[3].data.items);
             this.setState({
                 myService : p.data.list[3].data.items
             })
@@ -64,7 +65,7 @@ class Mine extends Component{
 
     getUser(){
         let res = localStorage.getItem('ep-username')
-        console.log(JSON.parse(res));
+        // console.log(JSON.parse(res));
         if(res){
             this.setState({
                 user:{
@@ -86,10 +87,17 @@ class Mine extends Component{
     componentDidMount(){
         this.getService()
         this.getUser()
+        const avatar = localStorage.getItem('ep-avatar')
+        if(avatar){
+            this.setState({
+                avatar
+            })
+        }
     }
     
     render(){
-        const {myorders,myService,isShow,user} = this.state
+        const {myorders,myService,isShow,user,avatar} = this.state
+        
         return(
             <div className="mine">
                 {/* 头部 */}
@@ -131,7 +139,7 @@ class Mine extends Component{
                     {
                         user.username ?
                         <div className="loginUser">
-                            <img src="https://img2.epetbar.com/dogs/1.jpg" />
+                            <img src={avatar ? avatar : "https://img2.epetbar.com/dogs/1.jpg"} />
                             <div>
                                 <p className="userName">
                                     {user.username}

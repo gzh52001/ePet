@@ -6,7 +6,6 @@ import bookApi from '@/api/book';
 import './book.scss'
 import Articals from './Articals'
 
-
 class Book extends Component{
     constructor(){
         super();
@@ -39,7 +38,8 @@ class Book extends Component{
             ],
             banner:[],
             column:[],
-            user:{}
+            user:{},
+            avatar:''
         }
         this.getData = this.getData.bind(this)
         this.getUser = this.getUser.bind(this)
@@ -47,7 +47,7 @@ class Book extends Component{
     async getData(){
         try{
             let p = await bookApi.getData(0,1)
-            console.log(p.data);
+            // console.log(p.data);
             this.setState({
                 banner:p.data.data.advs,
                 column:p.data.data.column,
@@ -70,10 +70,15 @@ class Book extends Component{
     componentDidMount(){
         this.getUser()
         this.getData()
-        
+        const avatar = localStorage.getItem('ep-avatar')
+        if(avatar){
+            this.setState({
+                avatar
+            })
+        }
     }
     render(){
-        const {advice,banner,column,user} = this.state
+        const {advice,banner,column,user,avatar} = this.state
         return(
             <div className="book">
                 {/* 头部 */}
@@ -97,7 +102,7 @@ class Book extends Component{
                     {
                         user.username ?
                         <div className="userInfo">
-                            <img src="https://img2.epetbar.com/dogs/1.jpg"/>
+                            <img src={avatar ? avatar : "https://img2.epetbar.com/dogs/1.jpg"}/>
                             <div>
                                 <h3>添加宠物</h3>
                                 <span>定制养宠干货</span>
