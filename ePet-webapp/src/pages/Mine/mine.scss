@@ -198,11 +198,13 @@
     }
     .setting_detail{
         .my-list{
+            .ant-upload{
+                width: 100%;
+            }
             .am-list-extra{
                 text-align: right;
                 padding: 0;
                 img{
-                    // margin: 0;
                     display: inline-block;
                     width: vw(34);
                     height: vw(34);

@@ -12,14 +12,14 @@ function Login (props){
     const [isShow,show] = useState(false)
     const [val,setItem] = useStorage('uid')
     const onFinish = async values => {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         let name = values.username;
         let keep = values.remember;
-        let psw = MD5(values.confrim).toString()
-        console.log(name,psw,keep);
+        let psw = MD5(values.password).toString()
+        // console.log(name,psw,keep);
         try{
             let p = await userApi.userLogin(name,psw,keep)
-            console.log(p.data);
+            // console.log(p.data);
             if(p.data.code == 200){
                 let { uid, username, token} = p.data.data;
                 userApi.checkToken(token).then(res=>{
@@ -32,13 +32,13 @@ function Login (props){
                             props.history.push('home')
                         },1000)
                     }else{
-                        Toast.fail('登录失效，请重新登录');
+                        Toast.fail('登录失效，请重新登录',1);
                     }
                 })
             }else if(p.data.code == 300){
-                Toast.fail('用户不存在或密码错误')
+                Toast.fail('用户不存在或密码错误',1)
             }else{
-                Toast.fail('服务器出错')
+                Toast.fail('服务器出错',1)
             }
         }catch(err){
             console.log(err);
