@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavBar, Icon, Carousel, Stepper } from 'antd-mobile'
+import { NavBar, Icon, Carousel, Stepper, Toast } from 'antd-mobile'
 import "./index.scss"
 import { RedditOutlined, UserOutlined, ShoppingCartOutlined, AppstoreOutlined } from '@ant-design/icons'
 import DatailTwo from '@/components/detailTwo'
