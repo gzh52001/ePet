@@ -1,5 +1,5 @@
-import React,{Component, useState, useEffect, useCallback} from 'react';
-import { Table, Input, InputNumber, Popconfirm, Form, message, Select, Button, Modal } from 'antd';
+import React,{ useState, useEffect, useCallback} from 'react';
+import { Table, Input, Form, message, Select, Button, Modal } from 'antd';
 import userApi from '@/api/custom';
 import './custom.scss'
 
@@ -9,11 +9,12 @@ function Custom(props){
     const [visible,isShow] = useState(false);
     const [uid,setUid] = useState('')
     const [username,setUsername] = useState('')
+    const [datalist,changeData] = useState('')
     useEffect(()=>{
         async function getUserList(){
             try{
                 let p = await userApi.getUserList()
-                console.log(p);
+                // console.log(p);
                 if(p.data.code == 200){
                     let arr = p.data.data
                     arr.map(item=>{
@@ -29,14 +30,13 @@ function Custom(props){
                 }else{
                     message.info('服务器出错')
                 }
-                // setData()
             }catch(err){
                 console.log(err);
             }
         }
 
         getUserList()
-    },[])
+    },[datalist])
 
     const { Option } = Select;
 
@@ -75,7 +75,7 @@ function Custom(props){
 
     // 删除用户
     const removeUser = (id,name) =>{
-        console.log('remove=',id);
+        // console.log('remove=',id);
         setUid(id)
         setUsername(name)
         isShow(true)
@@ -98,9 +98,9 @@ function Custom(props){
 
     // 删除确认对话框
     const handleOk = () => {
-        
         deleteUser(uid)
         isShow(false)
+        changeData('改变了') //重新获取数据，刷新
       };
     
     const handleCancel = () => {
