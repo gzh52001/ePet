@@ -1,6 +1,6 @@
 import request from '@/utils/requestLocal';
 export default {
-    checkname(name){
+    /* checkname(name){
         return request({
             method: "get",
             url:'user/checkname?name='+name,
@@ -15,22 +15,22 @@ export default {
                 psw
             }
         });
-    },
-    userLogin(name,psw,keep){
+    }, */
+    userLogin(username,userpass,keep){//登录
         return request({
             method: "post",
-            url:'user/login',
+            url:'loginMms/login',
             data:{
-                name,
-                psw,
+                username,
+                userpass,
                 keep
             }
         });
     },
-    checkToken(token){
+    checkToken(token){//验证token
         return request({
             method: "get",
-            url:'user//verify?token='+token,
+            url:'loginMms/verify?token='+token,
         });
     }
 }

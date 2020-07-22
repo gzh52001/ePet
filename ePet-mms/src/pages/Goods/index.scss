@@ -1,0 +1,45 @@
+.goods{
+    .add{
+        border: none;
+        margin-left: 40px;
+        width: 70px;
+        height: 30px;
+       /*  border-radius: 10px; */
+        background-color: skyblue;
+    }
+    .boxbutton{
+        width: 60px;
+        height: 30px;
+        border: none;
+    }
+    .formfater{
+        width: 2000px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        height: 2000px;
+        background-color: rgba(0,0,0,0.3);
+        .formlist{
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 500px;
+            height: 300px;
+            padding: 20px;
+            background-color: #f3f4f5;
+            border-radius: 20px;
+            h2{
+                font-size: 20px;
+                line-height: 20px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
