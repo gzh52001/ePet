@@ -1,0 +1,11 @@
+.custom{
+    .search-form{
+        display: flex;
+        .ant-form-item{
+            margin-right: 15px;
+            .ant-btn{
+                margin-left: 6px;
+            }
+        }
+    }
+}

@@ -201,7 +201,7 @@ class Order extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="order">
                 <Form
                     ref={this.formRef}
                     {...layout}

@@ -119,13 +119,9 @@ function Reg (props){
                     }
                     ]}
                     label="用户名"
-                    hasFeedback
-                    
-                    // help="用户名已存在"
+                    validateTrigger="onBlur"
                 >
-                    <Input onBlur={()=>{
-                        form.validateFields(['username']);
-                    }}/>
+                    <Input />
                 </Form.Item>
                 {/* 密码 */}
                 <Form.Item

@@ -3,6 +3,7 @@ import { createStore } from "redux"
 let initState = {
     goodslist: [],
     totalPrice: 0,
+    isShow: false
 }
 
 
@@ -66,6 +67,16 @@ function reducer(state = initState, action) {
                 })
             }
         }
+        case 'SHOW':
+            return{
+                ...state,
+                isShow:true
+            }
+        case 'HIDE':
+            return{
+                ...state,
+                isShow:false
+            }
         default: {
             return state
         }
