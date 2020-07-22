@@ -33,16 +33,19 @@ class Home extends Component {
         Api.indexlist().then(res => {
             console.log(res.data.datas.list)
             this.setState({
-                shop: res.data.datas.list[8],
-                shoptitle: res.data.datas.list[8].data.title,
-                shoptitle2: res.data.datas.list[8].data.stateTitle,
-                shoplistes: res.data.datas.list[8].data.goods,
-                banner: res.data.datas.list[7].data.images,
-                newbanner: res.data.datas.list[10].data.ranklist[0].list,
-                newbanner2: res.data.datas.list[10].data.ranklist[1].list,
-                newbanner3: res.data.datas.list[10].data.ranklist[2].list,
+                shop: res.data.datas.list[7],
+                shoptitle: res.data.datas.list[7].data.title,
+                shoptitle2: res.data.datas.list[7].data.stateTitle,
+                shoplistes: res.data.datas.list[7].data.goods,
+                banner: res.data.datas.list[6].data.images,
+                newbanner: res.data.datas.list[9].data.ranklist[0].list,
+                newbanner2: res.data.datas.list[9].data.ranklist[1].list,
+                newbanner3: res.data.datas.list[9].data.ranklist[2].list,
             })
         })
+    }
+    componentWillUnmount() {
+        this.setState = ()=>false;
     }
     gogoods = (id) => {
         this.props.history.push("/detail/" + id)

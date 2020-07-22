@@ -187,6 +187,9 @@ class Cart extends Component {
     gohome = () => {
         this.props.history.push("/home")
     }
+    gohome2 = () =>{
+        this.props.history.push("/home")
+    }
     //计算价格数量
     allprice = ()=>{
         let length = this.props.cardlist.filter(i =>{
@@ -204,7 +207,7 @@ class Cart extends Component {
         return (
             <div>
                 <div className="shophead">
-                    <div className="shophead-left"><LeftOutlined /></div>
+                    <div className="shophead-left" onClick={this.gohome2}><LeftOutlined /></div>
                     <div className="shophead-text">购物车</div>
                     <div className="shophead-right" onClick={this.openbox}><MessageOutlined /></div>
                 </div>

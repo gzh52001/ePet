@@ -25,7 +25,11 @@ function Layoutbox(){
                 <Sidebar/>
                 <Layout style={{ padding: '0 24px 24px' }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item>{(()=>{
+                        let url = window.location.href
+                        let text = url.split("/");
+                        return text[5]
+                    })()}</Breadcrumb.Item>
                     </Breadcrumb>
                     <Content
                     className="site-layout-background"

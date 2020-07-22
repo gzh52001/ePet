@@ -20,6 +20,13 @@ module.exports={
                 changeOrigin: true,
                 pathRewrite: {"^/local" : "/"}
               },
+              "/dev": {
+                target: "http://localhost:3099",
+                changeOrigin: true,
+                pathRewrite: {
+                    "^/dev": "/"
+                }
+            }
         }
     },
     //重命名路径
