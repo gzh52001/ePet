@@ -73,5 +73,6 @@ module.exports={
             template:path.join(__dirname,'public/template.html'),
             title:'e宠后台管理系统', //在模板title标签中写入<%= htmlWebpackPlugin.options.title %>  
         })
-    ]
+    ],
+    node: {  fs: "empty"}
 }

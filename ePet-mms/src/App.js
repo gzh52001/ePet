@@ -5,7 +5,7 @@ import Login from '@/pages/Login'
 
 function App() {
     return (
-        <div className="app">
+        <div className="app" style={{height:"100%"}}>
             <Switch>
                 <Route path='/app' component={Layoutbox}></Route>
                 <Route path='/login' component={Login}></Route>

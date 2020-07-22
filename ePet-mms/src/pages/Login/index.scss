@@ -1,0 +1,26 @@
+.bigerBox{
+    width: 100%;
+    height: 100%;
+    background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595307990574&di=27df8e020f59b17240fd2fb56b70e797&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201505%2F08%2F20150508231321_kHfTu.jpeg) ;
+    background-size:contain;
+    .bigBox{
+        h1{
+            font-size: 20px;
+            text-align: center;
+            line-height: 20px;
+            margin-bottom: 10px;
+        }
+        width: 500px;
+        background-color: #f3f4f5c7;
+        padding-top: 25px;
+        border-radius: 10%;
+        box-shadow: 1px 1px 3px 3px #efefef;
+        height: 300px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        margin: auto;
+    }
+}

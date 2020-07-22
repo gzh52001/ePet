@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch,Route,Redirect } from 'react-router-dom';
+import React,{Component} from 'react';
+import { Route,Redirect} from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import './layoutbox.scss';
 import Headbar from './Headbar';
@@ -8,20 +8,22 @@ import Home from '@/pages/Home';
 import Custom from '@/pages/Custom';
 import Goods from '@/pages/Goods';
 import Order from '@/pages/Order';
+import withLogin from '@/withLogin.js'
 
-
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
-
-function Layoutbox(){
-    return (
+const { Content} = Layout;
+class Layoutbox extends Component{
+    constructor(){
+        super()
+    }
+    render(){
+       return(
         <div className="layout">
-            <Layout 
-            style={{
-                height:'100vh'
-            }}>
-                <Headbar />
-                <Layout>
+        <Layout 
+        style={{
+            height:'100vh'
+        }}>
+            <Headbar />
+            <Layout>
                 <Sidebar/>
                 <Layout style={{ padding: '0 24px 24px' }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
@@ -46,10 +48,12 @@ function Layoutbox(){
                     <Redirect from='/app' to='/app/home' exact></Redirect>
                     </Content>
                 </Layout>
-                </Layout>
             </Layout>
-        </div>
-    )
+        </Layout>
+    </div>
+       )
+    }
 }
 
+Layoutbox= withLogin(Layoutbox)
 export default Layoutbox
