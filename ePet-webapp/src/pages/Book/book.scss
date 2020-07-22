@@ -91,7 +91,7 @@
             }
         }
     }
-    // 
+    // 文章
     .acticals_container{
         .am-tabs{
             position: sticky;
@@ -167,5 +167,9 @@
                 }
             }
         }
+    }
+    // 置顶
+    .ant-back-top{
+        bottom: 80px;
     }
 }

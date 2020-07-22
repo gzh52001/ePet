@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import Tabbar from '@/components/Tabbar';
 import {EnvironmentOutlined,DownOutlined,MessageOutlined,FolderViewOutlined,SearchOutlined} from '@ant-design/icons';
-import { Carousel } from 'antd';
+import { Carousel,BackTop } from 'antd';
 import bookApi from '@/api/book';
 import './book.scss'
 import Articals from './Articals'
@@ -150,6 +150,7 @@ class Book extends Component{
                 </div>
                 {/* 文章 */}
                 <Articals column={column}/>
+                <BackTop />
                 <Tabbar/>
             </div>
         )
