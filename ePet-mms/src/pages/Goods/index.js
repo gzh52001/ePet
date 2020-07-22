@@ -38,7 +38,6 @@ class Goods extends Component {
                         <Space size="middle">
                             <button className='boxbutton' onClick={this.changeform.bind(this,2,record)}>修改</button>
                             <Button onClick={this.remove.bind(this, record.Id)} type="dashed">删除</Button>
-                            {/* <button onClick={this.remove.bind(this, record.key)}></button> */}
                         </Space>
                     ),
                 },
@@ -82,8 +81,13 @@ class Goods extends Component {
             let p=await one.getgood(page)
             console.log(p);
             if(p.data.flag){
+                let arr=[]
+                p.data.data.map((item,index)=>{
+                    item.key=index
+                    arr.push(item)
+                })
                 this.setState({
-                    GoodsList:p.data.data,
+                    GoodsList:arr,
                     total:p.data.total
                 })
             }
@@ -135,8 +139,13 @@ class Goods extends Component {
             let p=await one.search(id,name)
             if(p.data.flag){
                 message.success('查询成功')
+                let arr=[]
+                p.data.data.map((item,index)=>{
+                    item.key=index
+                    arr.push(item)
+                })
                 this.setState({
-                    GoodsList:p.data.data,
+                    GoodsList:arr,
                     total:p.data.total
                 })
                 
