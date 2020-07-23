@@ -22,13 +22,14 @@ class Cart extends Component {
         this.onChange = this.onChange.bind(this)
     }
     componentDidMount() {
+        console.log(localStorage.getItem("ep-username"))
         let username = localStorage.getItem("ep-username")
         if (username) {
             this.setState({
                 useridclose: true
             })
         }
-
+        console.log(this.state.useridclose)
     }
     //全选反选
     allchecked = () => {
@@ -239,7 +240,7 @@ class Cart extends Component {
                     </div>
                 </div>
                 <div className="shopmain">
-                    <div className="shopnull2" style={this.props.cardlist.length != 0 ? { display: "none" } : { display: "block" }} >
+                    <div className="shopnull2" style={this.state.useridclose && this.props.cardlist.length == 0  ? { display: "block" } : { display: "none" }} >
                         <div className="shoptext">
                             <img src="http://static.epetbar.com/mini_images/emall/cart_bitmap.png" />
                             <h3>您的购物车空空如也</h3>

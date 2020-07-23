@@ -21,13 +21,25 @@ class List extends Component {
     }
     //获取商品内容
     getGoods = async (pet, id) => {
-        try {
-            let p = await one.getGoods(pet, id)
-            this.setState({
-                goodsList: p.data.cate_list
-            })
-        } catch (error) {
-            console.log(error);
+        if(id=88888888){
+            let isok=true
+            try {
+                let p = await one.getGoods(pet, id,isok)
+                this.setState({
+                    goodsList: p.data.cate_list
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }else{
+            try {
+                let p = await one.getGoods(pet, id)
+                this.setState({
+                    goodsList: p.data.cate_list
+                })
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
     //获取列表

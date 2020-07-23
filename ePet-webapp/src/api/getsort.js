@@ -9,12 +9,21 @@ export default {
         })
     },
     //获取列表内容
-    getGoods(pet='dog',id=88888){
-        return request({
-            method: 'get',
-            url: `/v3/goods/category/main.html?do=getChildren&owner=${id}&pet_type=${pet}&issite=true&version=358&system=wap&isWeb=1&distinct_id=1733cf1c35a315-07fe26a02d6361-5437971-250125-1733cf1c35b4a5&_=1594717224612`,
-          
-        })
+    getGoods(pet='dog',id=88888,isok){
+        if(isok){
+            return request({
+                method: 'get',
+                url: `/v3/goods/category/main.html?do=getChildren&owner=${id}&pet_type=${pet}&issite=true&version=358&system=wap&isWeb=1&distinct_id=1733cf1c35a315-07fe26a02d6361-5437971-250125-1733cf1c35b4a5&_=1594717224612&ishk=${isok}`,
+              
+            })
+        }else{
+            return request({
+                method: 'get',
+                url: `/v3/goods/category/main.html?do=getChildren&owner=${id}&pet_type=${pet}&issite=true&version=358&system=wap&isWeb=1&distinct_id=1733cf1c35a315-07fe26a02d6361-5437971-250125-1733cf1c35b4a5&_=1594717224612`,
+              
+            })
+        }
+               
     },
     //获取商品列表
     getShopList(pet,type,page,id=0,pam){

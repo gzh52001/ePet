@@ -11,8 +11,10 @@ const Login = lazy(()=> import('@/pages/Login'))
 const Reg = lazy(()=> import('@/pages/Reg'))
 const Setting = lazy(()=> import('@/pages/Mine/Setting'))
 const Search = lazy(()=> import('@/pages/Search'))
-const GoodsList = lazy(()=> import('@/pages/GoodsList'))
-const Detail = lazy(()=> import('@/pages/Detail'))
+// const GoodsList = lazy(()=> import('@/pages/GoodsList'))
+// const Detail = lazy(()=> import('@/pages/Detail'))
+import GoodsList from '@/pages/GoodsList'
+import Detail from '@/pages/Detail'
 import { connect } from "react-redux"
 import "./assets/flexible"
 import LoadingPage from '@/components/Loading'

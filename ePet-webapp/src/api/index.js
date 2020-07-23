@@ -1,4 +1,4 @@
-import requests from "../utils/requests.js"
+import requests from "../utils/requestLocal"
 
 export default{
     //主页下拉更新

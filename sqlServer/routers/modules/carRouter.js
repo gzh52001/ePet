@@ -374,5 +374,40 @@ router.put("/shoplists/puts", async (req, res) => {
         res.send(inf);
     }
 })
-
+//详细页查询商品 id
+router.post("/detail", async (req, res) => {
+        let gid = req.body.data.gid
+        console.log(req.body.data)
+        try {
+            let sql = `SELECT * FROM goodslist WHERE gid=${gid}`;
+            let p = await query(sql);//[{},{}]
+            let inf = {}
+            if (p.length) {
+                //查到数据：查询成功
+                inf = {
+                    code: 2000,
+                    flag: true,
+                    message: '查询成功',
+                    data: {
+                        p
+                    }
+                }
+            } else {
+                //查不到数据:不能登录
+                inf = {
+                    code: 3000,
+                    flag: false,
+                    message: '没有数据查询失败'
+                }
+            }
+            res.send(inf);
+        } catch (err) {
+            let inf = {
+                code: err.errno,
+                flag: false,
+                message: '查询失败'
+            }
+            res.send(inf);
+        }
+})
 module.exports = router;
