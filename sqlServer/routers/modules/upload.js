@@ -23,7 +23,7 @@ router.post('/avatarimg', upload.single('avatar'), async(req,res) => {
     // single里面的avatar是前端发来的键名
     let { uid } = req.body;
     let url = host + 'uploads/' + req.file.filename;
-    console.log(url)
+    // console.log(url)
     let p = await query(`UPDATE user SET avatar='${url}' WHERE uid='${uid}'`);
     let info = {};
     if(p.affectedRows) {

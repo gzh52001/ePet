@@ -81,7 +81,7 @@ function Setting(props){
     
     const uploadImg = {
         name: 'avatar',
-        action: 'http://localhost:6767/upload/avatarimg',
+        action: 'http://localhost:6677/upload/avatarimg',
         data: {
             uid:uid
         },

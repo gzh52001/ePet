@@ -376,10 +376,10 @@ router.put("/shoplists/puts", async (req, res) => {
 })
 //详细页查询商品 id
 router.post("/detail", async (req, res) => {
-        let gid = req.body.data.gid
-        console.log(req.body.data)
+        let {gid} = req.body.data
+        console.log(gid)
         try {
-            let sql = `SELECT * FROM goodslist WHERE gid=${gid}`;
+            let sql = `select * from goodslist where gid='${gid}'`;
             let p = await query(sql);//[{},{}]
             let inf = {}
             if (p.length) {

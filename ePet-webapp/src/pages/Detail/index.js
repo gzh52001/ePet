@@ -3,7 +3,7 @@ import { NavBar, Icon, Carousel, Stepper, Toast } from 'antd-mobile'
 import "./index.scss"
 import { RedditOutlined, UserOutlined, ShoppingCartOutlined, AppstoreOutlined } from '@ant-design/icons'
 import DatailTwo from '@/components/detailTwo'
-import { Statistic } from 'antd';
+import { Statistic, message } from 'antd';
 const { Countdown } = Statistic
 import one from '@/api/getsort'
 import store from "../../store"
@@ -89,7 +89,7 @@ class Detail extends Component {
     componentDidMount() {
         let url = window.location.href;
         let text = url.split("/");
-        let gid = text[5];
+        let gid = text[4];
         let p = goodApi.getgoodslist(gid).then(res => {
             this.setState({
                 price: res.data.data.p[0].price
@@ -188,7 +188,7 @@ class Detail extends Component {
             goodprice: goodprice,
             goodimgurl: goodimgurl,
         }
-        console.log(typeof(uid))
+        console.log(typeof (uid))
         if (!uid) {
             Toast.info('请登录', 2)
         } else {
@@ -197,28 +197,34 @@ class Detail extends Component {
             if (currentGoods) {
                 let p = goodApi.shoplistputs(uid, gid, goodqty).then(res => {
                     console.log(res)
-                    store.dispatch({
-                        type: "changqtys",
-                        gid,
-                        goodqty
-                    })
+                    if (res.data.flag) {
+                        message.success("添加成功")
+                        store.dispatch({
+                            type: "changqtys",
+                            gid,
+                            goodqty
+                        })
+                    }
                 })
             } else {
                 let p = goodApi.addshoplist(data).then(res => {
                     console.log(res)
-                    store.dispatch({
-                        type: "addshop",
-                        goods: {
-                            uid: uid,
-                            gid: gid,
-                            goodname: goodname,
-                            goodqty: goodqty,
-                            goodtitle: goodtitle,
-                            goodprice: goodprice,
-                            goodimgurl: goodimgurl,
-                            goodcheck: 0
-                        }
-                    })
+                    if (res.data.flag) {
+                        message.success("添加成功")
+                        store.dispatch({
+                            type: "addshop",
+                            goods: {
+                                uid: uid,
+                                gid: gid,
+                                goodname: goodname,
+                                goodqty: goodqty,
+                                goodtitle: goodtitle,
+                                goodprice: goodprice,
+                                goodimgurl: goodimgurl,
+                                goodcheck: 0
+                            }
+                        })
+                    }
                 })
             }
 
