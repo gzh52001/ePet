@@ -90,10 +90,9 @@ class Detail extends Component {
         let url = window.location.href;
         let text = url.split("/");
         let gid = text[5];
-        let p = textApi.getgoodslist(gid).then(res => {
-            // console.log(res)
+        let p = goodApi.getgoodslist(gid).then(res => {
             this.setState({
-                price: res.data.market_price
+                price: res.data.data.p[0].price
             })
         })
         let { match, location } = this.props

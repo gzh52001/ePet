@@ -52,5 +52,12 @@ export default{
                 data
             }
         })
+    },
+    getgoodslist(gid){
+        return requests.post("/shopcar/detail",{
+            data:{
+                gid
+            }
+        })
     }
 }
