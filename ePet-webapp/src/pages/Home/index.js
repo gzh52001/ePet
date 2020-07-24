@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Tabbar from '@/components/Tabbar'
-import "../Home/index.scss"
+
 import { Carousel, Tag } from 'antd';
 import { SearchOutlined, MessageOutlined } from "@ant-design/icons"
 import Api from "../../api/test"
 import goodApi from "../../api/index"
 import store from "../../store"
 import { connect } from "react-redux"
+
+import "../Home/index.scss"
+
+
 
 class Home extends Component {
     constructor() {
@@ -52,7 +56,7 @@ class Home extends Component {
     windowscolltop = () => {
         window.onscroll = () => {
             //吸顶变色
-            let h = document.documentElement.scrollTop
+            let h = document.documentElement.scrollTop || document.body.scrollTop;
             if (h > 20) {
                 this.setState({
                     contentClass: "ant-affixs"
@@ -65,7 +69,7 @@ class Home extends Component {
             //下拉获取更多
             let i = this.state.page
             // let scrollTop = document.documentElement.scrollTop
-            let heights = document.documentElement.scrollHeight
+            let heights = document.documentElement.scrollHeight || document.body.scrollHeight;
             let Clintheight = heights - h
             if (this.state.isclose && Clintheight < 1000) {
                 this.setState({
@@ -217,16 +221,16 @@ class Home extends Component {
                     </ul>
                 </div>
                 <div className="divimg">
-                    <a href="http://wap.epet.com/app/orderTopic/1076"><img className="divimg-1" src="https://img2.epetbar.com/2020-07/10/17/9549c13f05b95d3e28a09973ed37bcb4.gif?x-oss-process=style/water" /></a>
+                    <a href="/home"><img className="divimg-1" src="https://img2.epetbar.com/2020-07/10/17/9549c13f05b95d3e28a09973ed37bcb4.gif?x-oss-process=style/water" /></a>
                 </div>
                 <div className="divimg">
-                    <a href="http://wap.epet.com/app/orderTopic/1076"><img className="divimg-2" src="https://img2.epetbar.com/2020-04/28/16/34567f51bb692710d01cf47ef5e76ac4.png?x-oss-process=style/water" /></a>
+                    <a href="/home"><img className="divimg-2" src="https://img2.epetbar.com/2020-04/28/16/34567f51bb692710d01cf47ef5e76ac4.png?x-oss-process=style/water" /></a>
                 </div>
                 <div className="divimg">
-                    <a href="http://wap.epet.com/app/orderTopic/1076"><img className="divimg-3" src="https://img2.epetbar.com/2020-05/29/15/30de9bfa1af1052a69d280658a22f07f.png?x-oss-process=style/water" /></a>
+                    <a href="/home"><img className="divimg-3" src="https://img2.epetbar.com/2020-05/29/15/30de9bfa1af1052a69d280658a22f07f.png?x-oss-process=style/water" /></a>
                 </div>
                 <div className="divimg">
-                    <a href="http://wap.epet.com/app/orderTopic/1076"><img className="divimg-4" src="https://img2.epetbar.com/2020-04/10/17/bfb2556bedf271024f9da37998758f68.gif?x-oss-process=style/water" /></a>
+                    <a href="/home"><img className="divimg-4" src="https://img2.epetbar.com/2020-04/10/17/bfb2556bedf271024f9da37998758f68.gif?x-oss-process=style/water" /></a>
                 </div>
                 <div className="shoplist">
                     <div className="shoplist-tit">
@@ -257,10 +261,10 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="divimg">
-                    <a href="http://wap.epet.com/app/orderTopic/1076"><img className="divimg-5" src="https://img2.epetbar.com/2020-03/24/15/064095dd5fdf598a93f777794ea91f87.png?x-oss-process=style/water" /></a>
+                    <a href="/home"><img className="divimg-5" src="https://img2.epetbar.com/2020-03/24/15/064095dd5fdf598a93f777794ea91f87.png?x-oss-process=style/water" /></a>
                 </div>
                 <div className="divimg">
-                    <a href="http://wap.epet.com/app/orderTopic/1076">
+                    <a href="/home">
                         <img className="divimg-6" src="https://img2.epetbar.com/2020-07/14/18/85f2a61176be0552875705b496f21dd5.jpg?x-oss-process=style/water" />
                         <div className="divimg-left">
                             <img className="divimg-7" src="https://img2.epetbar.com/2020-07/09/20/953c9b4628985c848123c7dc37ffba8e.jpg?x-oss-process=style/water" />

@@ -70,7 +70,7 @@ module.exports = {
             // sass加载
             {
                 test: /\.scss$/,
-                exclude: path.join(__dirname, "node_modules"),
+                // exclude: path.join(__dirname, "node_modules"),
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]

@@ -61,5 +61,5 @@ class Layoutbox extends Component{
     }
 }
 
-// Layoutbox= withLogin(Layoutbox)
+Layoutbox= withLogin(Layoutbox)
 export default Layoutbox

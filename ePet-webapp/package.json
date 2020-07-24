@@ -23,7 +23,8 @@
     "rc-form": "^2.4.11",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "swiper": "^6.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
