@@ -109,7 +109,9 @@ class Book extends Component{
                             </div>
                         </div>
                         :
-                        <div className="userInfo">
+                        <div className="userInfo" onClick={()=>{
+                            this.props.history.push('/login')
+                        }}>
                             <img src="https://static.epetbar.com/epet_wap_img/opgc/zms_avatar_dog.png"/>
                             <div>
                                 <h3>立即登录</h3>

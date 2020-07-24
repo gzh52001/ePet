@@ -10,6 +10,7 @@ module.exports={
     output:{
         path:path.join(__dirname,'dist'),
         filename:"[name].[hash:5].bundle.js", // main.sdlkjfsld.boundle.js
+        publicPath:'/' //解决两级目录刷新问题
     },
     devServer:{
         contentBase: path.join(__dirname, "public"),

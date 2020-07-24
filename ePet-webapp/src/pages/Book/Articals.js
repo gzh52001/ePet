@@ -73,6 +73,10 @@ class Articals extends Component{
         this.checkScroll()
     }
 
+    componentWillUnmount(){
+        window.onscroll = null
+    }
+
     change(tab){
         this.setState({
             id:tab.id
@@ -136,6 +140,7 @@ class Articals extends Component{
                         })
                     }
                     </div>
+                    <div className="bottomDiv"></div>
             </div>
        )
     }

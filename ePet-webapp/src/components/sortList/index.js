@@ -108,7 +108,9 @@ class List extends Component {
                             : <div></div>
                     }
                 </div>
+                <div className="bottomDiv"></div>
             </div>
+            
         )
     }
 }

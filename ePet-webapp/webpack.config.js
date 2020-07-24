@@ -10,6 +10,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: "[name].[hash:5].bundle.js", // main.sdlkjfsld.boundle.js
+        publicPath:'/'
     },
     devServer: {
         contentBase: path.join(__dirname, "public"),
@@ -80,7 +81,7 @@ module.exports = {
         // 生成一个HTML文件
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'public/template.html'),
-            title: '首页', //在模板title标签中写入<%= htmlWebpackPlugin.options.title %>  
+            title: 'e宠商城', //在模板title标签中写入<%= htmlWebpackPlugin.options.title %>  
         })
     ]
 }

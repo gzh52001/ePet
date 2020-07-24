@@ -179,8 +179,8 @@ class Detail extends Component {
                     }
                 })
             } else {
-                goodApi.repectshoplist(uid,gid).then(resa =>{
-                    if(!resa.data.flag){
+                goodApi.repectshoplist(uid, gid).then(resa => {
+                    if (!resa.data.flag) {
                         let p = goodApi.addshoplist(data).then(res => {
                             // console.log(res)
                             if (res.data.flag) {
@@ -200,7 +200,7 @@ class Detail extends Component {
                                 })
                             }
                         })
-                    }else{
+                    } else {
                         let p = goodApi.shoplistputs(uid, gid, goodqty).then(res => {
                             // console.log(res)
                             if (res.data.flag) {
@@ -214,7 +214,7 @@ class Detail extends Component {
                         })
                     }
                 })
-                
+
             }
 
         }
@@ -375,6 +375,7 @@ class Detail extends Component {
                                     <button onClick={this.OpenWin.bind(this, 0)}>确定</button>
                                 </div>
                             </div> : ''}
+                            <div className="bottomDiv"></div>
                             {/* 底部tab */}
                             <footer>
                                 <div onClick={() => {
@@ -386,6 +387,7 @@ class Detail extends Component {
                                 <button onClick={this.addCart}>加入购物车</button>
                             </footer>
                         </> : <DatailTwo id={id}></DatailTwo>}
+
             </div>
 
         )

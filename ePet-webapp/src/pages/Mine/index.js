@@ -139,7 +139,7 @@ class Mine extends Component{
                     {
                         user.username ?
                         <div className="loginUser">
-                            <img src={avatar ? avatar : "https://img2.epetbar.com/dogs/1.jpg"} />
+                            <img src={avatar ? avatar : "https://img2.epetbar.com/dogs/1.jpg"} onClick={()=>{this.toSetting()}}/>
                             <div>
                                 <p className="userName">
                                     {user.username}
@@ -208,6 +208,7 @@ class Mine extends Component{
                         }
                     </ul>
                 </div>
+                <div className="bottomDiv"></div>
                 <Tabbar/>
                 
             </div>

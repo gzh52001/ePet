@@ -43,6 +43,7 @@ class Sort extends Component {
                 <Route path='/sort/list' component={List}></Route>
                 <Route path='/sort/brand' component={Brand}></Route>
                 <Redirect from="/sort" to='/sort/list'></Redirect>
+                <div className="bottomDiv"></div>
                 <Tabbar />
             </div>
         )

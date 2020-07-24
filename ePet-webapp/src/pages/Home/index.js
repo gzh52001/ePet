@@ -67,7 +67,7 @@ class Home extends Component {
             // let scrollTop = document.documentElement.scrollTop
             let heights = document.documentElement.scrollHeight
             let Clintheight = heights - h
-            if (this.state.isclose && Clintheight < 800) {
+            if (this.state.isclose && Clintheight < 1000) {
                 this.setState({
                     isclose: false,
                     page: this.state.page + 1

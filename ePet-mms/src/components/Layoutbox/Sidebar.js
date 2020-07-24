@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { HomeOutlined, UserOutlined, ShoppingOutlined, NotificationOutlined } from '@ant-design/icons';
 import './layoutbox.scss';
@@ -8,7 +8,13 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 function Sidebar(props){
+    // console.log('sidebar',props);
     const [menuKey,current] = useState('home')
+    useEffect(()=>{
+        let urlPath = props.location.pathname.split('/')[2]
+        current(urlPath)
+    })
+    
     const toPage = (path)=>{
         props.history.push(path)
     }

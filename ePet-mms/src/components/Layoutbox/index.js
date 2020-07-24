@@ -15,6 +15,12 @@ class Layoutbox extends Component{
     constructor(){
         super()
     }
+    componentDidMount(){
+        let urlPath = this.props.location.pathname.split('/')
+        if(urlPath.length == 2){
+            this.props.history.push('/app/home')
+        }
+    }
     render(){
        return(
         <div className="layout">
@@ -45,7 +51,7 @@ class Layoutbox extends Component{
                     <Route path='/app/custom' component={Custom} ></Route>
                     <Route path='/app/goods' component={Goods} ></Route>
                     <Route path='/app/order' component={Order} ></Route>
-                    <Redirect from='/app' to='/app/home' exact></Redirect>
+                   {/*  <Redirect from='/app' to='/app/home' exact></Redirect> */}
                     </Content>
                 </Layout>
             </Layout>
@@ -55,5 +61,5 @@ class Layoutbox extends Component{
     }
 }
 
-Layoutbox= withLogin(Layoutbox)
+// Layoutbox= withLogin(Layoutbox)
 export default Layoutbox
