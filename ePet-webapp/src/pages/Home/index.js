@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Tabbar from '@/components/Tabbar'
-
+import Swiper from "swiper"
 import { Carousel, Tag } from 'antd';
 import { SearchOutlined, MessageOutlined } from "@ant-design/icons"
 import Api from "../../api/test"
 import goodApi from "../../api/index"
 import store from "../../store"
 import { connect } from "react-redux"
-
+import "swiper/swiper.scss"
 import "../Home/index.scss"
 
 
@@ -45,6 +45,12 @@ class Home extends Component {
                 newbanner2: res.data.datas.list[10].data.ranklist[1].list,
                 newbanner3: res.data.datas.list[10].data.ranklist[2].list,
             })
+        })
+        new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            observer: true,//修改swiper自己或子元素时，自动初始化swiper
+            // observeParents: true//修改swiper的父元素时，自动初始化swiper
+
         })
     }
     componentWillUnmount() {
@@ -242,22 +248,24 @@ class Home extends Component {
                             <h5>{this.state.shoptitle2}</h5>
                         </div>
                     </div>
-                    <div className="shoplists">
-                        {
-                            this.state.shoplistes.map(item => (<div key={item.gid} className="lis">
-                                <a href="https://wap.epet.com/surprise/Main.html?pet_type=dog&tid=18:00">
-                                    <div className="shoptop">
-                                        <img src={item.image.img_url} />
-                                        <div className={item.discount === "" ? "" : "discount"}>{item.discount}</div>
-                                    </div>
-                                    <div className="shopmodel">{item.subject}</div>
-                                    <div className="shopbottom">
-                                        <span>¥{item.sale_price}</span>
-                                        <del>¥{item.little_price}</del>
-                                    </div>
-                                </a>
-                            </div>))
-                        }
+                    <div className="swiper-container">
+                        <div className="swiper-wrapper">
+                            {
+                                this.state.shoplistes.map(item => (<div key={item.gid} className="swiper-slide"><div className="lis">
+                                    <a href="https://wap.epet.com/surprise/Main.html?pet_type=dog&tid=18:00">
+                                        <div className="shoptop">
+                                            <img src={item.image.img_url} />
+                                            <div className={item.discount === "" ? "" : "discount"}>{item.discount}</div>
+                                        </div>
+                                        <div className="shopmodel">{item.subject}</div>
+                                        <div className="shopbottom">
+                                            <span>¥{item.sale_price}</span>
+                                            <del>¥{item.little_price}</del>
+                                        </div>
+                                    </a>
+                                </div></div>))
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className="divimg">

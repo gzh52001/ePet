@@ -1,7 +1,7 @@
 import React, { useState, useEffect ,layout} from "react"
 import { Table, Button, message, Form, Input, DatePicker, Modal} from 'antd';
 import orderApi from "../../api/order"
-
+import "./eidt.scss"
 export const Eidtitem = ({ visible, onCancel, rowinfo, mark,onReset }) => {
     const [info, setinfo] = useState("")
     const [form] = Form.useForm()

@@ -1,0 +1,10 @@
+.ant-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .ant-form-item{
+        width: 450px;
+        height: 50px;
+    }
+}

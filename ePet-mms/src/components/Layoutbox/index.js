@@ -18,6 +18,7 @@ class Layoutbox extends Component{
     componentDidMount(){
         let urlPath = this.props.location.pathname.split('/')
         if(urlPath.length == 2){
+            console.log(123)
             this.props.history.push('/app/home')
         }
     }
@@ -51,7 +52,7 @@ class Layoutbox extends Component{
                     <Route path='/app/custom' component={Custom} ></Route>
                     <Route path='/app/goods' component={Goods} ></Route>
                     <Route path='/app/order' component={Order} ></Route>
-                   {/*  <Redirect from='/app' to='/app/home' exact></Redirect> */}
+                    {/* <Redirect from='/app' to='/app/home' exact></Redirect> */}
                     </Content>
                 </Layout>
             </Layout>

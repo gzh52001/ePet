@@ -182,12 +182,12 @@ class GoodsList extends Component {
     addGoods = (gid, e) => {
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation()
-        let {uid} = this.state
-        if(!uid){
-            Toast.info('请登录',2)
-        }else{
+        // let {uid} = this.state
+        // if(!uid){
+        //     Toast.info('请登录',2)
+        // }else{
             
-        }
+        // }
     }
     goGoods = (gid,price) => {//去详情页
         this.props.history.push({ 

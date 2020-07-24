@@ -5,21 +5,21 @@ import "./index.scss"
 import { Eidtitem } from "./eidt"
 
 let data = [];
-orderApi.getorder().then(res => {
-    // console.log(res)
-    for (let i = 0; i < res.data.data.length; i++) {
-        data.push({
-            key: i + 1,
-            uid: res.data.data[i].uid,
-            gid: res.data.data[i].gid,
-            goodname: res.data.data[i].goodname,
-            goodqty: res.data.data[i].goodqty,
-            goodtitle: res.data.data[i].goodtitle,
-            goodprice: res.data.data[i].goodprice,
-            ordertime: res.data.data[i].ordertime,
-        });
-    }
-})
+        orderApi.getorder().then(res => {
+            // console.log(res)
+            for (let i = 0; i < res.data.data.length; i++) {
+                data.push({
+                    key: i + 1,
+                    uid: res.data.data[i].uid,
+                    gid: res.data.data[i].gid,
+                    goodname: res.data.data[i].goodname,
+                    goodqty: res.data.data[i].goodqty,
+                    goodtitle: res.data.data[i].goodtitle,
+                    goodprice: res.data.data[i].goodprice,
+                    ordertime: res.data.data[i].ordertime,
+                });
+            }
+        })
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -69,8 +69,8 @@ class Order extends Component {
                     ket: "action",
                     render: (text, record) => (
                         <span>
-                            <button onClick={this.eidt.bind(null, record)}>修改</button>
-                            <button onClick={this.removeritem.bind(null, record)}>删除</button>
+                            <Button type="primary" onClick={this.eidt.bind(null, record)}>修改</Button>
+                            <Button type="primary" style={{backgroundColor:'red',border:'0'}} onClick={this.removeritem.bind(null, record)}>删除</Button>
                         </span>
                     ),
                 },
@@ -83,6 +83,7 @@ class Order extends Component {
     }
 
     componentDidMount() {
+        
         this.setState({
             datas: data,
             total: data.length,
@@ -90,29 +91,46 @@ class Order extends Component {
     }
     //查询成功传入数据
     onFinish = values => {
-        // console.log(values)
+        console.log(values)
         if (values.gid == undefined && values.uid == undefined) {
             message.error('uid,gid不能为空')
         } else {
             let gid = values.gid
             let uid = values.uid
-            // this.setState({
-            //     react: true,
-            //     btn:uid,
-            //     btn2 : gid
-            // })
-            console.log(this.state.react)
             orderApi.orderlistid(uid, gid).then(res => {
-                for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i] = {
-                        ...res.data.data[i],
-                        key: i + 1
+                console.log(res)
+                if (res.data.flag) {
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        res.data.data[i] = {
+                            ...res.data.data[i],
+                            key: i + 1
+                        }
                     }
+                    this.setState({
+                        datas: res.data.data,
+                        total: res.data.data.length
+                    })
+                } else {
+                    orderApi.getorder().then(res => {
+                        // console.log(res)
+                        for (let i = 0; i < res.data.data.length; i++) {
+                            data.push({
+                                key: i + 1,
+                                uid: res.data.data[i].uid,
+                                gid: res.data.data[i].gid,
+                                goodname: res.data.data[i].goodname,
+                                goodqty: res.data.data[i].goodqty,
+                                goodtitle: res.data.data[i].goodtitle,
+                                goodprice: res.data.data[i].goodprice,
+                                ordertime: res.data.data[i].ordertime,
+                            });
+                        }
+                    })
+                    this.setState({
+                        datas: data,
+                        total: data.length,
+                    })
                 }
-                this.setState({
-                    datas: res.data.data,
-                    total: res.data.data.length
-                })
             })
 
         }
@@ -215,12 +233,14 @@ class Order extends Component {
                     <Form.Item
                         label="uid"
                         name="uid"
+                        style={{width:150,height:40,marginRight:30}}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
                         label="gid"
                         name="gid"
+                        style={{width:150,height:40,marginRight:30}}
                     >
                         <Input />
                     </Form.Item>

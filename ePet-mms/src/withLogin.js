@@ -17,7 +17,7 @@ function withLogin(Oldcomponent) {
                 this.props.history.push('/login')
             }
             
-           /*  super.componentDidMount(); */
+            super.componentDidMount(); 
         }
         checklogin=async (token)=>{
             try{
