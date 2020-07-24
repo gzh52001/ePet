@@ -56,7 +56,7 @@ class Mine extends Component{
             let p = await mine.getService();
             // console.log(p.data.list[3].data.items);
             this.setState({
-                myService : p.data.list[3].data.items
+                myService : p.data.list[(p.data.list.length)-1].data.items
             })
         }catch(err){
             console.log(err);

@@ -36,12 +36,12 @@ export const Eidtitem = ({ visible, onCancel, rowinfo, mark,onReset }) => {
                         let gid = values.gid
                         let ordertime = values["date-picker"]._d
                         let p = orderApi.orderlistput(values,gid,ordertime).then(res=>{
-                            console.log(res)
+                            // console.log(res)
                         })
                         onReset()
                     }else{
                         //新增
-                        console.log(values)
+                        // console.log(values)
                         let ordertime = values["date-picker"]._d
                         let uid = values.uid
                         let gid = values.gid
@@ -60,7 +60,7 @@ export const Eidtitem = ({ visible, onCancel, rowinfo, mark,onReset }) => {
                         })
                     }
                 }).catch(info =>{
-                    console.log(info)
+                    // console.log(info)
                 })
             }}
             onCancel={() => {

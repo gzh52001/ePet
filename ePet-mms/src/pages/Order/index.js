@@ -3,22 +3,23 @@ import { Table, Button, message, Form, Input, DatePicker, Modal } from 'antd';
 import orderApi from "../../api/order"
 import "./index.scss"
 import { Eidtitem } from "./eidt"
+
 let data = [];
-let p = orderApi.getorder().then(res => {
-    for (let i = 0; i < res.data.data.p.length; i++) {
+orderApi.getorder().then(res => {
+    // console.log(res)
+    for (let i = 0; i < res.data.data.length; i++) {
         data.push({
             key: i + 1,
-            uid: res.data.data.p[i].uid,
-            gid: res.data.data.p[i].gid,
-            goodname: res.data.data.p[i].goodname,
-            goodqty: res.data.data.p[i].goodqty,
-            goodtitle: res.data.data.p[i].goodtitle,
-            goodprice: res.data.data.p[i].goodprice,
-            ordertime: res.data.data.p[i].ordertime,
+            uid: res.data.data[i].uid,
+            gid: res.data.data[i].gid,
+            goodname: res.data.data[i].goodname,
+            goodqty: res.data.data[i].goodqty,
+            goodtitle: res.data.data[i].goodtitle,
+            goodprice: res.data.data[i].goodprice,
+            ordertime: res.data.data[i].ordertime,
         });
     }
 })
-
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -89,7 +90,7 @@ class Order extends Component {
     }
     //查询成功传入数据
     onFinish = values => {
-        console.log(values)
+        // console.log(values)
         if (values.gid == undefined && values.uid == undefined) {
             message.error('uid,gid不能为空')
         } else {
@@ -101,16 +102,16 @@ class Order extends Component {
             //     btn2 : gid
             // })
             console.log(this.state.react)
-            let p = orderApi.orderlistid(uid, gid).then(res => {
-                for (let i = 0; i < res.data.data.p.length; i++) {
-                    res.data.data.p[i] = {
-                        ...res.data.data.p[i],
+            orderApi.orderlistid(uid, gid).then(res => {
+                for (let i = 0; i < res.data.data.length; i++) {
+                    res.data.data[i] = {
+                        ...res.data.data[i],
                         key: i + 1
                     }
                 }
                 this.setState({
-                    datas: res.data.data.p,
-                    total: res.data.data.p.length
+                    datas: res.data.data,
+                    total: res.data.data.length
                 })
             })
 
@@ -118,18 +119,19 @@ class Order extends Component {
     };
     //重置数据跟查询
     onReset = () => {
-        let p = orderApi.getorder().then(res => {
+        orderApi.getorder().then(res => {
+            // console.log(res)
             let data = []
-            for (let i = 0; i < res.data.data.p.length; i++) {
+            for (let i = 0; i < res.data.data.length; i++) {
                 data.push({
                     key: i + 1,
-                    uid: res.data.data.p[i].uid,
-                    gid: res.data.data.p[i].gid,
-                    goodname: res.data.data.p[i].goodname,
-                    goodqty: res.data.data.p[i].goodqty,
-                    goodtitle: res.data.data.p[i].goodtitle,
-                    goodprice: res.data.data.p[i].goodprice,
-                    ordertime: res.data.data.p[i].ordertime,
+                    uid: res.data.data[i].uid,
+                    gid: res.data.data[i].gid,
+                    goodname: res.data.data[i].goodname,
+                    goodqty: res.data.data[i].goodqty,
+                    goodtitle: res.data.data[i].goodtitle,
+                    goodprice: res.data.data[i].goodprice,
+                    ordertime: res.data.data[i].ordertime,
                 });
             }
             this.setState({
@@ -144,7 +146,7 @@ class Order extends Component {
     };
     //修改订单
     eidt = (record) => {
-        console.log(record)
+        // console.log(record)
         this.setState({
             visible: true,
             rowinfo: record,
@@ -162,16 +164,16 @@ class Order extends Component {
                 message.success('删除成功');
                 let p2 = orderApi.getorder().then(res => {
                     let data = []
-                    for (let i = 0; i < res.data.data.p.length; i++) {
+                    for (let i = 0; i < res.data.data.length; i++) {
                         data.push({
                             key: i + 1,
-                            uid: res.data.data.p[i].uid,
-                            gid: res.data.data.p[i].gid,
-                            goodname: res.data.data.p[i].goodname,
-                            goodqty: res.data.data.p[i].goodqty,
-                            goodtitle: res.data.data.p[i].goodtitle,
-                            goodprice: res.data.data.p[i].goodprice,
-                            ordertime: res.data.data.p[i].ordertime,
+                            uid: res.data.data[i].uid,
+                            gid: res.data.data[i].gid,
+                            goodname: res.data.data[i].goodname,
+                            goodqty: res.data.data[i].goodqty,
+                            goodtitle: res.data.data[i].goodtitle,
+                            goodprice: res.data.data[i].goodprice,
+                            ordertime: res.data.data[i].ordertime,
                         });
                     }
                     this.setState({
@@ -192,11 +194,11 @@ class Order extends Component {
         })
     };
     //新增订单
-    addodrder = () =>{
+    addodrder = () => {
         this.setState({
-            visible:true,
-            rowinfo:"",
-            mark:false
+            visible: true,
+            rowinfo: "",
+            mark: false
         })
     }
     render() {

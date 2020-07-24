@@ -410,4 +410,39 @@ router.post("/detail", async (req, res) => {
             res.send(inf);
         }
 })
+//详细页新增时是否里面有重复增加
+router.post("/shoplists/repect", async (req, res) => {
+    let {uid,gid} = req.body.data
+    try {
+        let sql = `SELECT * FROM shoplist WHERE uid=${uid} and gid=${gid}`;
+        let p = await query(sql);//[{},{}]
+        let inf = {}
+        if (p.length) {
+            //查到数据：查询成功
+            inf = {
+                code: 2000,
+                flag: true,
+                message: '查询成功',
+                data: {
+                    p
+                }
+            }
+        } else {
+            //查不到数据:不能登录
+            inf = {
+                code: 3000,
+                flag: false,
+                message: '没有数据查询失败'
+            }
+        }
+        res.send(inf);
+    } catch (err) {
+        let inf = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(inf);
+    }
+})
 module.exports = router;

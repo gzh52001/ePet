@@ -21,17 +21,6 @@ class List extends Component {
     }
     //获取商品内容
     getGoods = async (pet, id) => {
-        // if(id=88888888){
-        //     let isok=true
-        //     try {
-        //         let p = await one.getGoods(pet, id,isok)
-        //         this.setState({
-        //             goodsList: p.data.cate_list
-        //         })
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // }else{
             try {
                 let p = await one.getGoods(pet, id)
                 this.setState({
@@ -76,7 +65,9 @@ class List extends Component {
                 <ul className='one'>
                     {
                         sortList.map((item) => (
+                            item.cateid!=88888888?
                             <li key={item.cateid} className={item.cateid == listId ? 'box' : 'id_param'} onClick={this.changelist.bind(this, item.cateid)}>{item.name}</li>
+                            :''
                         ))
                     }
                 </ul>

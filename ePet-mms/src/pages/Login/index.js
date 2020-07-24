@@ -31,9 +31,9 @@ class Login extends Component {
     login = async (username, userpass, keep) => {
         try {
             let p = await one.userLogin(username, userpass, keep)
-            localStorage.setItem('token', p.data.data.token)
-            localStorage.setItem('username', p.data.data.username)
             if (p.data.flag) {
+                localStorage.setItem('token', p.data.data.token)
+                localStorage.setItem('username', p.data.data.username)
                 this.props.history.push({
                     pathname: '/app',
                 })
@@ -41,6 +41,7 @@ class Login extends Component {
                 message.error('登录失败，如有问题请找客服！')
             }
         } catch (error) {
+            message.error('登录失败，如有问题请找客服！')
             console.log(error);
         }
     }

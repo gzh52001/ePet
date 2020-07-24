@@ -15,7 +15,7 @@ function Headbar(props){
     return(
         <Header className="header">
             <div className="logo" >
-                <img src="http://localhost:6677/logo.jpg" />
+                <img src="http://47.113.84.151:6688/logo.jpg" />
                 <span>e宠后台管理系统</span>
             </div>
             {/* 退出 */}

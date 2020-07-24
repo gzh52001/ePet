@@ -5,9 +5,8 @@ import { Carousel, Tag } from 'antd';
 import { SearchOutlined, MessageOutlined } from "@ant-design/icons"
 import Api from "../../api/test"
 import goodApi from "../../api/index"
-// import { connect } from "react-redux"
-// import store from "../../store"
-
+import store from "../../store"
+import { connect } from "react-redux"
 
 class Home extends Component {
     constructor() {
@@ -29,18 +28,18 @@ class Home extends Component {
         this.windowscolltop()
     }
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
         Api.indexlist().then(res => {
-            console.log(res.data.datas.list)
+            // console.log(res.data.datas.list)
             this.setState({
-                shop: res.data.datas.list[7],
-                shoptitle: res.data.datas.list[7].data.title,
-                shoptitle2: res.data.datas.list[7].data.stateTitle,
-                shoplistes: res.data.datas.list[7].data.goods,
-                banner: res.data.datas.list[6].data.images,
-                newbanner: res.data.datas.list[9].data.ranklist[0].list,
-                newbanner2: res.data.datas.list[9].data.ranklist[1].list,
-                newbanner3: res.data.datas.list[9].data.ranklist[2].list,
+                shop: res.data.datas.list[8],
+                shoptitle: res.data.datas.list[8].data.title,
+                shoptitle2: res.data.datas.list[8].data.stateTitle,
+                shoplistes: res.data.datas.list[8].data.goods,
+                banner: res.data.datas.list[7].data.images,
+                newbanner: res.data.datas.list[10].data.ranklist[0].list,
+                newbanner2: res.data.datas.list[10].data.ranklist[1].list,
+                newbanner3: res.data.datas.list[10].data.ranklist[2].list,
             })
         })
     }
@@ -393,5 +392,11 @@ class Home extends Component {
         )
     }
 }
-
+const mapStateToProps = (state) => {
+    // console.log(state)
+    return {
+        carlist: state.goodslist
+    }
+}
+Home = connect(mapStateToProps)(Home)
 export default Home

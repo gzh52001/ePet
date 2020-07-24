@@ -14,7 +14,6 @@ function Custom(props){
         async function getUserList(){
             try{
                 let p = await userApi.getUserList()
-                // console.log(p);
                 if(p.data.code == 200){
                     let arr = p.data.data
                     arr.map(item=>{
@@ -42,7 +41,6 @@ function Custom(props){
 
     // 点击搜索
     const onFinish = async values => { 
-        // console.log('Received values of form: ', values);
         let obj = {}
         for (let key in values){
             if(values[key]){
@@ -51,7 +49,6 @@ function Custom(props){
         }
         try{
             let p = await userApi.searchUser(obj)
-            // console.log('p',p.data.data);
             if(p.data.code == 200){
                 let arr = p.data.data
                 arr.map(item=>{
@@ -75,7 +72,6 @@ function Custom(props){
 
     // 删除用户
     const removeUser = (id,name) =>{
-        // console.log('remove=',id);
         setUid(id)
         setUsername(name)
         isShow(true)
@@ -156,9 +152,6 @@ function Custom(props){
           key: 'avatar',
           width: 50,
           render: (text,record,index) => {
-            //   console.log('record',record);
-            //   console.log('index',index);
-            //   console.log('text',text);
             return <img src={text} style={{width:40,height:40}}/>
         }
         },

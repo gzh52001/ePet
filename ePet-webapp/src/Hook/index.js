@@ -1,11 +1,5 @@
 import {useState} from 'react';
 
-
-
-// const [val,setItem] = useStorage(key)
-
-// console.log(val);
-// setItem(key,newval)
 function useStorage(key){
     const initData = get(key);
     const [value,setValue] = useState(initData);

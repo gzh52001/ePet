@@ -27,7 +27,7 @@ function withLogin(Oldcomponent) {
                         login:true
                     })
                 }else{
-                    console.log(1);
+                    // console.log(1);
                     this.props.history.push('/login')
                 }
             }catch(error){

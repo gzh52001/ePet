@@ -1,0 +1,57 @@
+@function vw($px){
+    @return ($px / 375) * 100vw
+}
+.brand{
+    margin-bottom: vw(60);
+    div{
+        width: 100%;
+        min-height: vw(100);
+        margin-top: vw(5);
+        background-color: #fff;
+        padding: vw(10) 0;
+        p{
+            font-size: vw(14);
+            margin: 0;
+            text-align: center;
+            line-height: vw(14);
+            color: #999999;
+        }
+        ul{
+            width: 100%;
+            overflow: hidden;
+            li{
+                width: vw(122);
+                float: left;
+                height: vw(107);
+                text-align: center;
+                margin:vw(20) vw(1.5) 0 vw(1.5);
+                padding:0 vw(5);
+                main{
+                    width: vw(112);
+                    height: vw(62);
+                    padding: vw(10);
+                    border: vw(1) solid #f3f4f5;
+                    img{
+                        width: vw(79);
+                        height: vw(40);
+                    }
+                }
+                h3{
+                    width: vw(112);
+                    margin-top: vw(5);
+                    font-size: vw(14);
+                    line-height: vw(14);
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
+                }
+                b{
+                    width: vw(112);
+                    text-align: center;
+                    font-size: vw(12);
+                    line-height: vw(14);
+                }
+            }
+        }
+    }
+}

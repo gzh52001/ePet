@@ -11,34 +11,6 @@ import { connect } from "react-redux"
 import goodApi from "../../api/index"
 import textApi from "../../api/test"
 
-//购物车商品列表初始化
-let goodsd = []
-let uid = localStorage.getItem("ep-uid")
-let p = goodApi.getshoplist(uid).then(res => {
-    let list = []
-    if (res.data.flag) {
-        for (let i = 0; i < res.data.data.p.length; i++) {
-            list.push(res.data.data.p[i])
-        }
-        for (let i = 0; i < list.length; i++) {
-            goodsd = list[i]
-            store.dispatch({
-                type: 'addshop',
-                goods: {
-                    gid: goodsd.gid,
-                    goodname: goodsd.goodname,
-                    goodprice: goodsd.goodprice,
-                    goodimgurl: goodsd.goodimgurl,
-                    goodqty: goodsd.goodqty,
-                    goodtitle: goodsd.goodtitle,
-                    uid: localStorage.getItem("ep-uid"),
-                    goodcheck: goodsd.goodcheck
-                }
-            });
-        }
-    }
-})
-
 class Detail extends Component {
     constructor() {
         super()
@@ -188,15 +160,15 @@ class Detail extends Component {
             goodprice: goodprice,
             goodimgurl: goodimgurl,
         }
-        console.log(typeof (uid))
+        // console.log(typeof (uid))
         if (!uid) {
             Toast.info('请登录', 2)
+            this.props.history.push("/login")
         } else {
             let currentGoods = this.props.carlist.filter(item => item.gid === gid)[0]
-            console.log(currentGoods)
             if (currentGoods) {
                 let p = goodApi.shoplistputs(uid, gid, goodqty).then(res => {
-                    console.log(res)
+                    // console.log(res)
                     if (res.data.flag) {
                         message.success("添加成功")
                         store.dispatch({
@@ -207,25 +179,42 @@ class Detail extends Component {
                     }
                 })
             } else {
-                let p = goodApi.addshoplist(data).then(res => {
-                    console.log(res)
-                    if (res.data.flag) {
-                        message.success("添加成功")
-                        store.dispatch({
-                            type: "addshop",
-                            goods: {
-                                uid: uid,
-                                gid: gid,
-                                goodname: goodname,
-                                goodqty: goodqty,
-                                goodtitle: goodtitle,
-                                goodprice: goodprice,
-                                goodimgurl: goodimgurl,
-                                goodcheck: 0
+                goodApi.repectshoplist(uid,gid).then(resa =>{
+                    if(!resa.data.flag){
+                        let p = goodApi.addshoplist(data).then(res => {
+                            // console.log(res)
+                            if (res.data.flag) {
+                                message.success("添加成功")
+                                store.dispatch({
+                                    type: "addshop",
+                                    goods: {
+                                        uid: uid,
+                                        gid: gid,
+                                        goodname: goodname,
+                                        goodqty: goodqty,
+                                        goodtitle: goodtitle,
+                                        goodprice: goodprice,
+                                        goodimgurl: goodimgurl,
+                                        goodcheck: 0
+                                    }
+                                })
+                            }
+                        })
+                    }else{
+                        let p = goodApi.shoplistputs(uid, gid, goodqty).then(res => {
+                            // console.log(res)
+                            if (res.data.flag) {
+                                message.success("添加成功")
+                                store.dispatch({
+                                    type: "changqtys",
+                                    gid,
+                                    goodqty
+                                })
                             }
                         })
                     }
                 })
+                
             }
 
         }

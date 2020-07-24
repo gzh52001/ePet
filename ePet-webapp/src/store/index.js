@@ -1,11 +1,40 @@
 import { createStore } from "redux"
-
+// import goodApi from "../api/index"
 let initState = {
     goodslist: [],
     totalPrice: 0,
     isShow: false
 }
 
+
+ //购物车商品列表初始化
+//  let goodsd = []
+//  let uid = localStorage.getItem("ep-uid")
+//  let n = goodApi.getshoplist(uid).then(resa => {
+//      let list = []
+//      console.log(resa)
+//      if (resa.data.flag) {
+//          for (let i = 0; i < resa.data.data.p.length; i++) {
+//              list.push(resa.data.data.p[i])
+//          }
+//          for (let i = 0; i < list.length; i++) {
+//              goodsd = list[i]
+//              store.dispatch({
+//                  type: 'addshop',
+//                  goods: {
+//                      gid: goodsd.gid,
+//                      goodname: goodsd.goodname,
+//                      goodprice: goodsd.goodprice,
+//                      goodimgurl: goodsd.goodimgurl,
+//                      goodqty: goodsd.goodqty,
+//                      goodtitle: goodsd.goodtitle,
+//                      uid: localStorage.getItem("ep-uid"),
+//                      goodcheck: goodsd.goodcheck
+//                  }
+//              });
+//          }
+//      }
+//  })
 
 function reducer(state = initState, action) {
     switch (action.type) {
@@ -42,7 +71,7 @@ function reducer(state = initState, action) {
             }
         }
         case "changqtys":{
-            console.log(action)
+            // console.log(action)
             return {
                 ...state,
                 goodslist: state.goodslist.map(item => {

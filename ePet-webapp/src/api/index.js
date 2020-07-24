@@ -59,5 +59,13 @@ export default{
                 gid
             }
         })
+    },
+    repectshoplist(uid,gid){
+        return requests.post("/shopcar/shoplists/repect",{
+            data:{
+                uid,
+                gid
+            }
+        })
     }
 }

@@ -6,7 +6,6 @@ import { connect } from "react-redux"
 import store from "../../store"
 import goodApi from "../../api/index"
 
-
 class Cart extends Component {
     constructor() {
         super()
@@ -16,20 +15,50 @@ class Cart extends Component {
             visible: false,
             allcheck: false,
             ischeck: false,
-            pirce:0,
-            qty:0,
+            pirce: 0,
+            qty: 0,
         }
         this.onChange = this.onChange.bind(this)
     }
     componentDidMount() {
-        console.log(localStorage.getItem("ep-username"))
+        // console.log(localStorage.getItem("ep-username"))
         let username = localStorage.getItem("ep-username")
         if (username) {
             this.setState({
                 useridclose: true
             })
+            let goodsd = []
+            let uid = localStorage.getItem("ep-uid")
+            let n = goodApi.getshoplist(uid).then(resa => {
+                let list = []
+                // console.log(resa)
+                if (resa.data.flag) {
+                    for (let i = 0; i < resa.data.data.p.length; i++) {
+                        list.push(resa.data.data.p[i])
+                    }
+                    store.dispatch({
+                        type:"clear"
+                    })
+                    for (let i = 0; i < list.length; i++) {
+                        goodsd = list[i]
+                        store.dispatch({
+                            type: 'addshop',
+                            goods: {
+                                gid: goodsd.gid,
+                                goodname: goodsd.goodname,
+                                goodprice: goodsd.goodprice,
+                                goodimgurl: goodsd.goodimgurl,
+                                goodqty: goodsd.goodqty,
+                                goodtitle: goodsd.goodtitle,
+                                uid: localStorage.getItem("ep-uid"),
+                                goodcheck: goodsd.goodcheck
+                            }
+                        });
+                    }
+                }
+            })
         }
-        console.log(this.state.useridclose)
+        // console.log(this.state.useridclose)
     }
     //全选反选
     allchecked = () => {
@@ -37,11 +66,11 @@ class Cart extends Component {
             this.setState({
                 allcheck: false,
             })
-            this.props.cardlist.map(item =>{
+            this.props.cardlist.map(item => {
                 let goodcheck = 0
                 let gid = item.gid
                 store.dispatch({
-                    type:"checks",
+                    type: "checks",
                     gid,
                     goodcheck
                 })
@@ -51,11 +80,11 @@ class Cart extends Component {
             this.setState({
                 allcheck: true,
             })
-            this.props.cardlist.map(item =>{
+            this.props.cardlist.map(item => {
                 let goodcheck = 1
                 let gid = item.gid
                 store.dispatch({
-                    type:"checks",
+                    type: "checks",
                     gid,
                     goodcheck
                 })
@@ -76,36 +105,36 @@ class Cart extends Component {
                         gid,
                         goodcheck
                     })
-                    let allchecklength = this.props.cardlist.filter(i =>{
+                    let allchecklength = this.props.cardlist.filter(i => {
                         return i.goodcheck == 1
                     })
-                    if(allchecklength.length === this.props.cardlist.length){
+                    if (allchecklength.length === this.props.cardlist.length) {
                         this.setState({
-                            allcheck : true
+                            allcheck: true
                         })
-                    }else{
+                    } else {
                         this.setState({
-                            allcheck : false
+                            allcheck: false
                         })
                     }
                     this.allprice()
-                }else{
+                } else {
                     let goodcheck = 0
                     store.dispatch({
                         type: "checks",
                         gid,
                         goodcheck
                     })
-                    let allchecklength = this.props.cardlist.filter(i =>{
+                    let allchecklength = this.props.cardlist.filter(i => {
                         return i.goodcheck == 1
                     })
-                    if(allchecklength.length === this.props.cardlist.length){
+                    if (allchecklength.length === this.props.cardlist.length) {
                         this.setState({
-                            allcheck : true
+                            allcheck: true
                         })
-                    }else{
+                    } else {
                         this.setState({
-                            allcheck : false
+                            allcheck: false
                         })
                     }
                     this.allprice()
@@ -123,7 +152,7 @@ class Cart extends Component {
     handleOk = e => {
         let uid = localStorage.getItem("ep-uid")
         let p = goodApi.shoplisrclear(uid).then(res => {
-            console.log(res)
+            // console.log(res)
         })
         store.dispatch({
             type: "clear"
@@ -135,18 +164,18 @@ class Cart extends Component {
     };
 
     handleCancel = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
             visible: false,
         });
     };
-    
+
     //修改数量
     onChange(value, gid) {
         let uid = localStorage.getItem("ep-uid")
         let goodqty = value
         let p = goodApi.shoplistput(uid, goodqty, gid).then(res => {
-            console.log(res)
+            // console.log(res)
         }).catch(err => {
             console.log(err)
         })
@@ -162,7 +191,7 @@ class Cart extends Component {
     removegoods = (gid) => {
         let uid = localStorage.getItem("ep-uid")
         let p = goodApi.shoplistremove(uid, gid).then(res => {
-            console.log(res)
+            // console.log(res)
         }).catch(err => {
             console.log(err)
         })
@@ -192,42 +221,42 @@ class Cart extends Component {
     //     this.props.history.push("/home")
     // }
     //计算价格数量
-    allprice = ()=>{
-        let length = this.props.cardlist.filter(i =>{
+    allprice = () => {
+        let length = this.props.cardlist.filter(i => {
             return i.goodcheck == 1
         })
         let pirces = length.reduce((prev, item, idx, arr) => prev + item.goodprice * item.goodqty, 0)
-        let qtys = length.reduce((prev, i, idx, arr) => prev +  i.goodqty, 0)
+        let qtys = length.reduce((prev, i, idx, arr) => prev + i.goodqty, 0)
         this.setState({
-            pirce : pirces,
-            qty : qtys
+            pirce: pirces,
+            qty: qtys
         })
     }
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div>
                 <div className="shophead">
-                    <div className="shophead-left" onClick={()=>{
+                    <div className="shophead-left" onClick={() => {
                         this.props.history.go(-1)
                     }}><LeftOutlined /></div>
                     <div className="shophead-text">购物车</div>
                     <div className="shophead-right" onClick={this.openbox}><MessageOutlined /></div>
                 </div>
                 <div className="shopnav" style={this.state.isclose ? { display: "block" } : { display: "none" }}>
-                    <a href="#home">
+                    <a href="/home">
                         <HomeOutlined />
                         <h3>首页</h3>
                     </a>
-                    <a href="#sort">
+                    <a href="/sort">
                         <CopyOutlined />
                         <h3>商品分类</h3>
                     </a>
-                    <a href="#cart">
+                    <a href="/cart">
                         <ShoppingCartOutlined />
                         <h3>购物车</h3>
                     </a>
-                    <a href="#mine">
+                    <a href="/mine">
                         <GithubOutlined />
                         <h3>我的e宠</h3>
                     </a>
@@ -240,7 +269,7 @@ class Cart extends Component {
                     </div>
                 </div>
                 <div className="shopmain">
-                    <div className="shopnull2" style={this.state.useridclose && this.props.cardlist.length == 0  ? { display: "block" } : { display: "none" }} >
+                    <div className="shopnull2" style={this.state.useridclose && this.props.cardlist.length == 0 ? { display: "block" } : { display: "none" }} >
                         <div className="shoptext">
                             <img src="http://static.epetbar.com/mini_images/emall/cart_bitmap.png" />
                             <h3>您的购物车空空如也</h3>

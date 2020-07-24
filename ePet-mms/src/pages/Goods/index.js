@@ -30,6 +30,9 @@ class Goods extends Component {
                     title: '商品图片',
                     dataIndex: 'images',
                     key: 'images',
+                    render:(text, record) => (
+                        <img src={text} style={{width:40,height:40}}/>
+                    )
                 },
                 {
                     title: '操作',
@@ -79,7 +82,7 @@ class Goods extends Component {
     getgoods=async (page)=>{//查询数据
         try{
             let p=await one.getgood(page)
-            console.log(p);
+            //console.log(p);
             if(p.data.flag){
                 let arr=[]
                 p.data.data.map((item,index)=>{
@@ -195,7 +198,7 @@ class Goods extends Component {
     }
     changegood=async (val)=>{//修改
         let{page,putID}=this.state
-        console.log(val);
+        //console.log(val);
         try{
             let p=await one.changegood(putID,val)
             if(p.data.flag){

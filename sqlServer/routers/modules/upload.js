@@ -24,25 +24,37 @@ router.post('/avatarimg', upload.single('avatar'), async(req,res) => {
     let { uid } = req.body;
     let url = host + 'uploads/' + req.file.filename;
     // console.log(url)
-    let p = await query(`UPDATE user SET avatar='${url}' WHERE uid='${uid}'`);
-    let info = {};
-    if(p.affectedRows) {
-        info = {
-            code: 200,
-            flag: true,
-            message: '上传成功',
-            data: {
-                imgurl:url
+    try{
+        let p = await query(`UPDATE user SET avatar='${url}' WHERE uid='${uid}'`);
+        let info = {};
+        if(p.affectedRows) {
+            info = {
+                code: 200,
+                flag: true,
+                message: '上传成功',
+                data: {
+                    imgurl:url
+                }
+            }
+        }else{
+            info = {
+                code: 300,
+                flag: false,
+                message: '上传失败'
             }
         }
-    }else{
-        info = {
-            code: 300,
-            flag: false,
-            message: '上传失败'
-        }
-    }
     res.send(info);
+
+    }catch(err){
+        console.log(err);
+        let info = {
+            code: 500,
+            flag: false,
+            message: '服务器出错'
+        }
+        res.send(info);
+    }
+    
 })
 
 module.exports = router;//导出

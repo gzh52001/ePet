@@ -5,7 +5,8 @@ import { createForm } from 'rc-form';
 import { Upload, message } from 'antd';
 import useStorage from '@/Hook';
 import userApi from '@/api/user'
-
+import {connect} from "react-redux"
+import store from "../../store"
 function Setting(props){
     const now = new Date(Date.now());
     const [uid,setUid] = useStorage('ep-uid');
@@ -81,7 +82,7 @@ function Setting(props){
     
     const uploadImg = {
         name: 'avatar',
-        action: 'http://localhost:6677/upload/avatarimg',
+        action: 'http://47.113.84.151:6677/upload/avatarimg',
         data: {
             uid:uid
         },
@@ -108,6 +109,9 @@ function Setting(props){
         localStorage.removeItem('ep-uid')
         localStorage.removeItem('ep-token')
         localStorage.removeItem('ep-avatar')
+        store.dispatch({
+            type:"clear"
+        })
         Toast.info('正在退出',1)
         setTimeout(()=>{
             props.history.push('/home')
@@ -226,4 +230,6 @@ function Setting(props){
 }
 
 Setting = createForm()(Setting)
+
+Setting = connect()(Setting)
 export default Setting

@@ -1,9 +1,12 @@
-import request from "../utils/request"
+import request from "../utils/requestLocal"
 
 export default {
     //查询数据
     getorder(){
-        return request.get("/order/orderlist")
+        return request({
+            method:"get",
+            url:"/order/orderlist"
+        })
     },
     //删除订单
     orderremove(uid,gid){

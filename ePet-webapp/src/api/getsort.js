@@ -46,5 +46,11 @@ export default {
             method: 'get',
             url: `/v3/goods.html?do=getContent&gid=${id}&id=1&system=wap&isWeb=1&version=517&distinct_id=1733cf1c35a315-07fe26a02d6361-5437971-250125-1733cf1c35b4a5`
         })
+    },
+    getBrand(){//获取品牌
+        return request({
+            method: 'get',
+            url: `/v3/brand/list/main.html?pet_type=dog&system=wap&isWeb=1&version=303&distinct_id=1737bbb6b7c13e-0f0a6df50e04f8-f7d123e-921600-1737bbb6b7e339&_=1595508759653`
+        })
     }
 }

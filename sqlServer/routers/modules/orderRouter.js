@@ -10,15 +10,15 @@ router.get("/orderlist", async (req, res) => {
         let sql = `SELECT * FROM orderlist`;
         let p = await query(sql);//[{},{}]
         let inf = {}
+        console.log(p)
         if (p.length) {
             //查到数据：查询成功
             inf = {
                 code: 2000,
                 flag: true,
                 message: '查询成功',
-                data: {
-                    p
-                }
+                data: p
+                
             }
         } else {
             //查不到数据:不能登录
@@ -84,9 +84,7 @@ router.get("/orderlists", async (req, res) => {
                 code: 2000,
                 flag: true,
                 message: '查询成功',
-                data: {
-                    p
-                }
+                data: p
             }
         } else {
             //查不到数据:不能登录
@@ -176,4 +174,5 @@ router.post("/orderlist/add", async (req, res) => {
         res.send(inf);
     }
 })
+
 module.exports = router
