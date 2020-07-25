@@ -61,6 +61,14 @@
         top: vw(350);
         z-index:3;
     }
+    .slider{
+        height: vw(375)!important;
+        width: 100%!important;
+        .slider-frame{
+            height: vw(375)!important;
+            width: 100%!important;
+        }
+    }
     .detail{
         width: 100%;
         min-height: vw(50);
