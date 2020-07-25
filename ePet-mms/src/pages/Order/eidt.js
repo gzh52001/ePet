@@ -23,6 +23,7 @@ export const Eidtitem = ({ visible, onCancel, rowinfo, mark,onReset }) => {
     }, [mark, form, rowinfo])
     return (
         <Modal
+            className="edit"
             getContainer={false}
             destroyOnClose={true}
             title={mark ? "修改订单":"新增订单"}
