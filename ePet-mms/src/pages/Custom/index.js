@@ -226,6 +226,7 @@ function Custom(props){
                     </Button>
                     <Button htmlType="button" onClick={() => {
                         form.resetFields();
+                        changeData('改变')
                     }}>
                         重置
                     </Button>
