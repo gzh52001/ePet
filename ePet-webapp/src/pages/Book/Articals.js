@@ -75,6 +75,7 @@ class Articals extends Component{
 
     componentWillUnmount(){
         window.onscroll = null
+        window.removeEventListener("mousemove", this.checkScroll);
     }
 
     change(tab){
