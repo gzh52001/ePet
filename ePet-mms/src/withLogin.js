@@ -13,11 +13,12 @@ function withLogin(Oldcomponent) {
             let token = localStorage.getItem('token');
             if(token){
                 this.checklogin(token)
+                super.componentDidMount(); 
             }else{
                 this.props.history.push('/login')
             }
             
-            super.componentDidMount(); 
+            
         }
         checklogin=async (token)=>{
             try{
